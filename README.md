@@ -1,5 +1,6 @@
 # Zulu JDK Homebrew Casks
 
+https://www.azul.com/downloads/zulu/
 
 ## Installation:
 

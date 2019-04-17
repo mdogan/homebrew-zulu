@@ -1,5 +1,5 @@
 cask 'zulu-jdk11' do
-    version '11.29.11,11.0.2'
+    version '11.31.11,11.0.3'
     sha256 :no_check
 
     url "https://cdn.azul.com/zulu/bin/zulu#{version.before_comma}-ca-jdk#{version.after_comma}-macosx_x64.dmg",
