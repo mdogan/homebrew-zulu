@@ -17,6 +17,7 @@ brew cask install <name>
 | OpenJDK8 | `zulu-jdk8` |
 | OpenJDK11 | `zulu-jdk11` |
 | OpenJDK12 | `zulu-jdk12` |
+| Misson Control | `zulu-mc` |
 
 
 ### Warning
