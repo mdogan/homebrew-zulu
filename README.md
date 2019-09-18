@@ -1,6 +1,8 @@
 # Zulu JDK Homebrew Casks
 
-https://www.azul.com/downloads/zulu/
+[https://www.azul.com/downloads/zulu-community/](https://www.azul.com/downloads/zulu-community/?&os=macos&os-details=macOS&package=jdk)
+
+https://www.azul.com/products/zulu-mission-control/
 
 ## Installation:
 
@@ -17,6 +19,7 @@ brew cask install <name>
 | OpenJDK8 | `zulu-jdk8` |
 | OpenJDK11 | `zulu-jdk11` |
 | OpenJDK12 | `zulu-jdk12` |
+| OpenJDK13 | `zulu-jdk13` |
 | Misson Control | `zulu-mc` |
 
 

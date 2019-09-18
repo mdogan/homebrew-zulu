@@ -1,10 +1,10 @@
-cask 'zulu-jdk11' do
-    version '11.33.15_1,11.0.4'
-    sha256 '48c07dcce8be5e8ac5a4d0a602f96940883af235a7931a4b3b6ee1cb85c07d95'
+cask 'zulu-jdk13' do
+    version '13.29.9,13'
+    sha256 'f9972f622c489d6cfab2593f67caf4e18d27ca0a4c8a5ef5d70176d9ea6520ff'
 
     url "https://cdn.azul.com/zulu/bin/zulu#{version.before_comma}-ca-jdk#{version.after_comma}-macosx_x64.dmg",
         referer: 'https://www.azul.com/downloads/zulu-community/'
-    name 'Azul Zulu® JDK 11'
+    name 'Azul Zulu® JDK 13'
     homepage 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :sierra'
