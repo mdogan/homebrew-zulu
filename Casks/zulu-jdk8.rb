@@ -7,7 +7,7 @@ cask 'zulu-jdk8' do
     name 'Azul Zulu® JDK 8'
     homepage 'https://www.azul.com/downloads/zulu-community/'
 
-    depends_on macos: '>= :yosemite'
+    depends_on macos: '>= :high_sierra'
 
     pkg "Double-Click to Install Zulu #{version.major}.pkg"
 

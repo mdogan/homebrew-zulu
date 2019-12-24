@@ -7,10 +7,9 @@ cask 'zulu-jdk13' do
     name 'Azul Zulu® JDK 13'
     homepage 'https://www.azul.com/downloads/zulu-community/'
 
-    depends_on macos: '>= :sierra'
+    depends_on macos: '>= :high_sierra'
 
     pkg "Double-Click to Install Zulu #{version.major}.pkg"
 
-    uninstall pkgutil: "com.azulsystems.zulu.#{version.major}",
-              rmdir:   '/Library/Java/JavaVirtualMachines'
+    uninstall pkgutil: "com.azulsystems.zulu.#{version.major}"
   end

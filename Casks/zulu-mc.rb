@@ -7,7 +7,7 @@ cask 'zulu-mc' do
     name 'Zulu® Mission Control'
     homepage 'https://www.azul.com/products/zulu-mission-control/'
 
-    depends_on macos: '>= :sierra'
+    depends_on macos: '>= :high_sierra'
 
     app "zmc#{version}-macos_x64/Zulu Mission Control.app"
   end
