@@ -1,8 +1,8 @@
 cask 'zulu-jdk8' do
-    version '8.0.232,8.42.0.21-ca'
-    sha256 'b726c51d89f6c2baf2a3b1aa847883f98430fd932d875d04394d0e6bd711ce82'
+    version '8.0.232,8.42.0.23_1'
+    sha256 '47e5ba7f0d92f85c4273ac4eeb638d9971d75d07ac90cb7a64d7e7567b01d159'
 
-    url "https://cdn.azul.com/zulu/bin/zulu#{version.after_comma}-jdk#{version.before_comma}-macosx_x64.dmg",
+    url "https://cdn.azul.com/zulu/bin/zulu#{version.after_comma}-ca-jdk#{version.before_comma}-macosx_x64.dmg",
         referer: 'https://www.azul.com/downloads/zulu-community/'
     name 'Azul Zulu® JDK 8'
     homepage 'https://www.azul.com/downloads/zulu-community/'
