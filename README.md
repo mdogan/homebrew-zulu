@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/mdogan/homebrew-zulu/workflows/Build/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
+
 # Zulu JDK Homebrew Casks
 
 [https://www.azul.com/downloads/zulu-community/](https://www.azul.com/downloads/zulu-community/?&os=macos&os-details=macOS&package=jdk)

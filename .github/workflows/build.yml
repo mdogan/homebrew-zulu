@@ -26,3 +26,39 @@ jobs:
         env:
           HOMEBREW_COLOR: 1
           HOMEBREW_DEVELOPER: 1
+
+      - name: install jdk8
+        run: brew cask install zulu-jdk8
+        env:
+          HOMEBREW_COLOR: 1
+          HOMEBREW_DEVELOPER: 1
+
+      - name: install jdk11
+        run: brew cask install zulu-jdk11
+        env:
+          HOMEBREW_COLOR: 1
+          HOMEBREW_DEVELOPER: 1
+
+      - name: install jdk12
+        run: brew cask install zulu-jdk12
+        env:
+          HOMEBREW_COLOR: 1
+          HOMEBREW_DEVELOPER: 1
+
+      - name: install jdk13
+        run: brew cask install zulu-jdk13
+        env:
+          HOMEBREW_COLOR: 1
+          HOMEBREW_DEVELOPER: 1
+
+      - name: install jdk14
+        run: brew cask install zulu-jdk14
+        env:
+          HOMEBREW_COLOR: 1
+          HOMEBREW_DEVELOPER: 1
+
+      - name: install mission control
+        run: brew cask install zulu-mc
+        env:
+          HOMEBREW_COLOR: 1
+          HOMEBREW_DEVELOPER: 1
