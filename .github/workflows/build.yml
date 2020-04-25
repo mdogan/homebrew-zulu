@@ -57,6 +57,12 @@ jobs:
           HOMEBREW_COLOR: 1
           HOMEBREW_DEVELOPER: 1
 
+      - name: install jdk15ea
+        run: brew cask install zulu-jdk15ea
+        env:
+          HOMEBREW_COLOR: 1
+          HOMEBREW_DEVELOPER: 1
+
       - name: install mission control
         run: brew cask install zulu-mc
         env:
