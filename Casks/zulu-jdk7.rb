@@ -1,6 +1,6 @@
 cask 'zulu-jdk7' do
     version '7.0.262,7.38.0.11-ca'
-    sha256 '7991a2c6beeb08bdfe4943d0f667f837f329e116753d4497b820b9f3f97f7d4c'
+    sha256 '1506d0ab687d6504b1159b048470982376a55a6925214ab26117f21d4fb0e392'
 
     url "https://cdn.azul.com/zulu/bin/zulu#{version.after_comma}-jdk#{version.before_comma}-macosx_x64.dmg",
         referer: 'https://www.azul.com/downloads/zulu-community/'
