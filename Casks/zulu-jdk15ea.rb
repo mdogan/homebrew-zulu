@@ -9,5 +9,5 @@ cask 'zulu-jdk15ea' do
 
   depends_on macos: '>= :high_sierra'
 
-  artifact "." target: "/Library/Java/JavaVirtualMachines/zulu-jdk-#{version.before_comma}.jdk"
+  artifact ".", target: "/Library/Java/JavaVirtualMachines/zulu-jdk-#{version.before_comma}.jdk"
 end
