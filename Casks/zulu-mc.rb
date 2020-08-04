@@ -1,5 +1,5 @@
 cask 'zulu-mc' do
-    version '7.1.0.69-ca'
+    version '7.1.1.77-ca'
     sha256 :no_check
 
     url "https://static.azul.com/zmc/bin/zmc#{version}-macos_x64.tar.gz",
