@@ -1,4 +1,9 @@
-[![Build Status](https://github.com/mdogan/homebrew-zulu/workflows/Build/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
+[![Build Status](https://github.com/mdogan/homebrew-zulu/workflows/JDK7/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
+[![Build Status](https://github.com/mdogan/homebrew-zulu/workflows/JDK8/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
+[![Build Status](https://github.com/mdogan/homebrew-zulu/workflows/JDK11/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
+[![Build Status](https://github.com/mdogan/homebrew-zulu/workflows/JDK13/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
+[![Build Status](https://github.com/mdogan/homebrew-zulu/workflows/JDK15/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
+[![Build Status](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
 
 # Zulu JDK Homebrew Casks
 
