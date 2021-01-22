@@ -46,20 +46,8 @@ jobs:
           HOMEBREW_COLOR: 1
           HOMEBREW_DEVELOPER: 1
 
-      - name: install jdk12
-        run: brew install --cask zulu-jdk12
-        env:
-          HOMEBREW_COLOR: 1
-          HOMEBREW_DEVELOPER: 1
-
       - name: install jdk13
         run: brew install --cask zulu-jdk13
-        env:
-          HOMEBREW_COLOR: 1
-          HOMEBREW_DEVELOPER: 1
-
-      - name: install jdk14
-        run: brew install --cask zulu-jdk14
         env:
           HOMEBREW_COLOR: 1
           HOMEBREW_DEVELOPER: 1
