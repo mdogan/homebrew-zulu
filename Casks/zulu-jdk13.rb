@@ -1,16 +1,16 @@
 cask 'zulu-jdk13' do
 
   if Hardware::CPU.intel?
-    version '13.40.15,13.0.7'
-    sha256 '7195a58529887ecdd00ff1f8a776d4ed75e83ddf4f6a79274e7f02f95f4a37e4'
+    version '13.42.17,13.0.8'
+    sha256 '75cba5a0fb0609d71906c8cc8f3a4700ff037d3ff577c65e982bdc1d4bc4def4'
 
     url "https://cdn.azul.com/zulu/bin/zulu#{version.before_comma}-ca-jdk#{version.after_comma}-macosx_x64.dmg",
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :high_sierra'
   else
-    version '13.40.15,13.0.7'
-    sha256 'e5d644c9a6842b8e6400ce2356a692103711530ad0593a81b9398ab72f3386f8'
+    version '13.42.17,13.0.8'
+    sha256 '1a89abcbbdafd305bbffdcdce4bc0544ff69db5fe3a0403122a131e4913f132d'
 
     url "https://cdn.azul.com/zulu/bin/zulu#{version.before_comma}-ca-jdk#{version.after_comma}-macosx_aarch64.dmg",
         referer: 'https://www.azul.com/downloads/zulu-community/'
@@ -21,7 +21,7 @@ cask 'zulu-jdk13' do
   name 'Azul Zulu® JDK 13'
   homepage 'https://www.azul.com/downloads/zulu-community/'
 
-  pkg "Double-Click to Install Zulu #{version.major}.pkg"
+  pkg "Double-Click to Install Azul Zulu JDK #{version.major}.pkg"
 
   uninstall pkgutil: "com.azulsystems.zulu.#{version.major}"
 
