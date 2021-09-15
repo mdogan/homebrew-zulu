@@ -9,6 +9,6 @@ cask 'zulu-mc' do
 
     depends_on macos: '>= :high_sierra'
 
-    app "zmc#{version}-macos_x64/Zulu Mission Control.app"
+    app "zmc#{version}-macos_x64/Azul Mission Control.app"
 
   end
