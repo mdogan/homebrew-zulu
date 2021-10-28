@@ -3,7 +3,6 @@
 [![JDK11](https://github.com/mdogan/homebrew-zulu/workflows/JDK11/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
 [![JDK13](https://github.com/mdogan/homebrew-zulu/workflows/JDK13/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
 [![JDK15](https://github.com/mdogan/homebrew-zulu/workflows/JDK15/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
-[![JDK16](https://github.com/mdogan/homebrew-zulu/workflows/JDK16/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
 [![JDK17](https://github.com/mdogan/homebrew-zulu/workflows/JDK17/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
 [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
 
