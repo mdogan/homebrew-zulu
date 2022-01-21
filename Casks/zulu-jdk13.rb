@@ -1,16 +1,16 @@
 cask 'zulu-jdk13' do
 
   if Hardware::CPU.intel?
-    version '13.44.13,13.0.9'
-    sha256 'f3897710a368f8f87d28c73b8b20c62f7397de5d9b4eec8f90092ecc8638b4f3'
+    version '13.46.15,13.0.10'
+    sha256 '108ab2def40e4f70885bb32a33dfa6801ac00d21db3cb5051aa62aa28114302a'
 
     url "https://cdn.azul.com/zulu/bin/zulu#{version.before_comma}-ca-jdk#{version.after_comma}-macosx_x64.dmg",
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :high_sierra'
   else
-    version '13.44.13,13.0.9'
-    sha256 'c93142763d69c59c7ce38964754b08a1755f8318955ea40167bda6e485859566'
+    version '13.46.15,13.0.10'
+    sha256 '78d967aa00dcf6396042f3d917fc0a00179884fe7e98213704b783c3a2e05899'
 
     url "https://cdn.azul.com/zulu/bin/zulu#{version.before_comma}-ca-jdk#{version.after_comma}-macosx_aarch64.dmg",
         referer: 'https://www.azul.com/downloads/zulu-community/'
