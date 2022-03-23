@@ -4,6 +4,7 @@
 [![JDK13](https://github.com/mdogan/homebrew-zulu/workflows/JDK13/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
 [![JDK15](https://github.com/mdogan/homebrew-zulu/workflows/JDK15/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
 [![JDK17](https://github.com/mdogan/homebrew-zulu/workflows/JDK17/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
+[![JDK18](https://github.com/mdogan/homebrew-zulu/workflows/JDK18/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
 [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
 
 # Zulu JDK Homebrew Casks
@@ -32,4 +33,5 @@ brew install --cask <name>
 | OpenJDK15 | `zulu-jdk15` |
 | OpenJDK16 | `zulu-jdk16` |
 | OpenJDK17 | `zulu-jdk17` |
+| OpenJDK17 | `zulu-jdk18` |
 | Misson Control | `zulu-mc` |
