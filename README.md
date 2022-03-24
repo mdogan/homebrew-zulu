@@ -17,7 +17,7 @@ https://www.azul.com/products/zulu-mission-control/
 
 ```bash
 brew tap mdogan/zulu
-brew install --cask <name>
+brew install <name>
 ```
 
 ## Versions

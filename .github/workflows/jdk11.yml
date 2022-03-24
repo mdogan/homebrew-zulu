@@ -20,7 +20,7 @@ jobs:
     steps:
 
       - name: Check out
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: brew pull & reset & tap
         run: |
@@ -33,7 +33,7 @@ jobs:
           HOMEBREW_DEVELOPER: 1
 
       - name: install jdk11
-        run: brew install --cask zulu-jdk11
+        run: brew install zulu-jdk11
         env:
           HOMEBREW_COLOR: 1
           HOMEBREW_DEVELOPER: 1
