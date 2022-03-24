@@ -33,7 +33,7 @@ jobs:
           HOMEBREW_DEVELOPER: 1
 
       - name: install jdk17
-        run: brew install --cask zulu-jdk17
+        run: brew install zulu-jdk17
         env:
           HOMEBREW_COLOR: 1
           HOMEBREW_DEVELOPER: 1
