@@ -12,7 +12,7 @@ cask 'zulu-jdk13' do
     version '13.46.15,13.0.10'
     sha256 '78d967aa00dcf6396042f3d917fc0a00179884fe7e98213704b783c3a2e05899'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu13.46.15-ca-jdk13.0.10-macosx_x64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu13.46.15-ca-jdk13.0.10-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :big_sur'

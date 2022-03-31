@@ -48,7 +48,7 @@ public final class Main {
           w.writeUtf8("  else\n");
           w.writeUtf8("    version '" + armBundle.version() + "'\n");
           w.writeUtf8("    sha256 '" + armBundle.sha256_hash + "'\n\n");
-          w.writeUtf8("    url '" + x86Bundle.url + "',\n");
+          w.writeUtf8("    url '" + armBundle.url + "',\n");
           w.writeUtf8("        referer: 'https://www.azul.com/downloads/zulu-community/'\n\n");
           w.writeUtf8("    depends_on macos: '>= :big_sur'\n");
           w.writeUtf8("  end\n");
