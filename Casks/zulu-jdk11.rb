@@ -7,7 +7,7 @@ cask 'zulu-jdk11' do
     url 'https://cdn.azul.com/zulu/bin/zulu11.54.25-ca-jdk11.0.14.1-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
-    depends_on macos: '>= :high_sierra'
+    depends_on macos: '>= :mojave'
   else
     version '11.54.25,11.0.14.1'
     sha256 '37c12c6b01f63eac5e2a4276f6dd73603a68d60d3ca4158cdb5e21a633dd1f97'
