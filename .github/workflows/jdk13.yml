@@ -37,3 +37,9 @@ jobs:
         env:
           HOMEBREW_COLOR: 1
           HOMEBREW_DEVELOPER: 1
+
+      - name: uninstall jdk13
+        run: brew uninstall zulu-jdk13
+        env:
+          HOMEBREW_COLOR: 1
+          HOMEBREW_DEVELOPER: 1

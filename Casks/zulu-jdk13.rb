@@ -4,7 +4,7 @@ cask 'zulu-jdk13' do
     version '13.46.15,13.0.10'
     sha256 '108ab2def40e4f70885bb32a33dfa6801ac00d21db3cb5051aa62aa28114302a'
 
-    url "https://cdn.azul.com/zulu/bin/zulu#{version.before_comma}-ca-jdk#{version.after_comma}-macosx_x64.dmg",
+    url 'https://cdn.azul.com/zulu/bin/zulu13.46.15-ca-jdk13.0.10-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :high_sierra'
@@ -12,7 +12,7 @@ cask 'zulu-jdk13' do
     version '13.46.15,13.0.10'
     sha256 '78d967aa00dcf6396042f3d917fc0a00179884fe7e98213704b783c3a2e05899'
 
-    url "https://cdn.azul.com/zulu/bin/zulu#{version.before_comma}-ca-jdk#{version.after_comma}-macosx_aarch64.dmg",
+    url 'https://cdn.azul.com/zulu/bin/zulu13.46.15-ca-jdk13.0.10-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :big_sur'
@@ -21,8 +21,7 @@ cask 'zulu-jdk13' do
   name 'Azul Zulu® JDK 13'
   homepage 'https://www.azul.com/downloads/zulu-community/'
 
-  pkg "Double-Click to Install Azul Zulu JDK #{version.major}.pkg"
+  pkg 'Double-Click to Install Azul Zulu JDK 13.pkg'
 
-  uninstall pkgutil: "com.azulsystems.zulu.#{version.major}"
-
+  uninstall pkgutil: 'com.azulsystems.zulu.13'
 end
