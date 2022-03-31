@@ -1,12 +1,3 @@
-[![JDK7](https://github.com/mdogan/homebrew-zulu/workflows/JDK7/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
-[![JDK8](https://github.com/mdogan/homebrew-zulu/workflows/JDK8/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
-[![JDK11](https://github.com/mdogan/homebrew-zulu/workflows/JDK11/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
-[![JDK13](https://github.com/mdogan/homebrew-zulu/workflows/JDK13/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
-[![JDK15](https://github.com/mdogan/homebrew-zulu/workflows/JDK15/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
-[![JDK17](https://github.com/mdogan/homebrew-zulu/workflows/JDK17/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
-[![JDK18](https://github.com/mdogan/homebrew-zulu/workflows/JDK18/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
-[![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions)
-
 # Zulu JDK Homebrew Casks
 
 [https://www.azul.com/downloads/zulu-community/](https://www.azul.com/downloads/zulu-community/?&os=macos&os-details=macOS&package=jdk)
@@ -22,16 +13,18 @@ brew install <name>
 
 ## Versions
 
-| JDK | Cask Name |
-|--|--|
-| OpenJDK7 | `zulu-jdk7` |
-| OpenJDK8 | `zulu-jdk8` |
-| OpenJDK11 | `zulu-jdk11` |
-| OpenJDK12 | `zulu-jdk12` |
-| OpenJDK13 | `zulu-jdk13` |
-| OpenJDK14 | `zulu-jdk14` |
-| OpenJDK15 | `zulu-jdk15` |
-| OpenJDK16 | `zulu-jdk16` |
-| OpenJDK17 | `zulu-jdk17` |
-| OpenJDK18 | `zulu-jdk18` |
-| Misson Control | `zulu-mc` |
+| JDK | Cask Name | Build Status |
+|--|--|--|
+| OpenJDK 7 | `zulu-jdk7` | [![JDK7](https://github.com/mdogan/homebrew-zulu/workflows/JDK7/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 8 | `zulu-jdk8` | [![JDK8](https://github.com/mdogan/homebrew-zulu/workflows/JDK8/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 9 | `zulu-jdk9` | [![JDK9](https://github.com/mdogan/homebrew-zulu/workflows/JDK9/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 10 | `zulu-jdk10` | [![JDK10](https://github.com/mdogan/homebrew-zulu/workflows/JDK10/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 11 | `zulu-jdk11` | [![JDK11](https://github.com/mdogan/homebrew-zulu/workflows/JDK11/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 12 | `zulu-jdk12` | [![JDK12](https://github.com/mdogan/homebrew-zulu/workflows/JDK12/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 13 | `zulu-jdk13` | [![JDK13](https://github.com/mdogan/homebrew-zulu/workflows/JDK13/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 14 | `zulu-jdk14` | [![JDK14](https://github.com/mdogan/homebrew-zulu/workflows/JDK14/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 15 | `zulu-jdk15` | [![JDK15](https://github.com/mdogan/homebrew-zulu/workflows/JDK15/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 16 | `zulu-jdk16` | [![JDK16](https://github.com/mdogan/homebrew-zulu/workflows/JDK16/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 17 | `zulu-jdk17` | [![JDK17](https://github.com/mdogan/homebrew-zulu/workflows/JDK17/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 18 | `zulu-jdk18` | [![JDK18](https://github.com/mdogan/homebrew-zulu/workflows/JDK18/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| Mission Control | `zulu-mc` | [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |

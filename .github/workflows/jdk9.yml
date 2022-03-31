@@ -1,16 +1,16 @@
-name: JDK8
+name: JDK9
 
 on:
   push:
     branches:
       - '**'
     paths:
-      - 'Casks/zulu-jdk8.rb'
+      - 'Casks/zulu-jdk9.rb'
   pull_request:
     branches:
       - master
     paths:
-      - 'Casks/zulu-jdk8.rb'
+      - 'Casks/zulu-jdk9.rb'
 
 jobs:
 
@@ -32,14 +32,14 @@ jobs:
           HOMEBREW_COLOR: 1
           HOMEBREW_DEVELOPER: 1
 
-      - name: install jdk8
-        run: brew install zulu-jdk8
+      - name: install jdk9
+        run: brew install zulu-jdk9
         env:
           HOMEBREW_COLOR: 1
           HOMEBREW_DEVELOPER: 1
 
-      - name: uninstall jdk8
-        run: brew uninstall zulu-jdk8
+      - name: uninstall jdk9
+        run: brew uninstall zulu-jdk9
         env:
           HOMEBREW_COLOR: 1
           HOMEBREW_DEVELOPER: 1

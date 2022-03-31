@@ -1,0 +1,33 @@
+plugins {
+  id('java-library')
+  id('application')
+  alias(libs.plugins.spotless)
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
+}
+
+application {
+  mainClass = 'Main'
+}
+
+spotless {
+  java {
+    removeUnusedImports()
+    googleJavaFormat('1.15.0')
+  }
+}
+
+dependencies {
+  implementation(libs.retrofit.core)
+  implementation(libs.retrofit.moshi)
+  implementation(libs.okhttp)
+  implementation(libs.moshi)
+}
+
+tasks.named('assemble').configure {
+  dependsOn(tasks.getByName('installDist'))
+}
