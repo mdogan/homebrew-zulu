@@ -7,7 +7,7 @@ cask 'zulu-jdk8' do
     url 'https://cdn.azul.com/zulu/bin/zulu8.60.0.21-ca-jdk8.0.322-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
-    depends_on macos: '>= :high_sierra'
+    depends_on macos: '>= :mojave'
   else
     version '8.60.0.21,8.0.322'
     sha256 '6cea661f8bf457c3514cb8cb28d10f7ade1141a2ed6472c5c6f569a66dfbd87c'

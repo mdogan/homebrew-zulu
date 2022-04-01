@@ -42,7 +42,7 @@ public final class Main {
         w.writeUtf8("    sha256 '" + x86Bundle.sha256_hash + "'\n\n");
         w.writeUtf8("    url '" + x86Bundle.url + "',\n");
         w.writeUtf8("        referer: 'https://www.azul.com/downloads/zulu-community/'\n\n");
-        w.writeUtf8("    depends_on macos: '>= :high_sierra'\n");
+        w.writeUtf8("    depends_on macos: '>= :mojave'\n");
 
         if (armBundle != null) {
           w.writeUtf8("  else\n");

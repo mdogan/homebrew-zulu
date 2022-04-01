@@ -10,7 +10,7 @@ cask 'zulu-mc' do
     url "https://cdn.azul.com/zmc/bin/zmc#{version}-macos_x64.tar.gz",
         referer: 'https://www.azul.com/products/zulu-mission-control/'
 
-    depends_on macos: '>= :high_sierra'
+    depends_on macos: '>= :mojave'
 
     app "zmc#{version}-macos_x64/Azul Mission Control.app"
 

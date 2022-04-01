@@ -7,7 +7,7 @@ cask 'zulu-jdk18' do
     url 'https://cdn.azul.com/zulu/bin/zulu18.28.13-ca-jdk18.0.0-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
-    depends_on macos: '>= :high_sierra'
+    depends_on macos: '>= :mojave'
   else
     version '18.28.13,18.0.0'
     sha256 '1b690d087e0b0f0b61cc7ac0f8b9f7d0fd6269f0132067330a106f205f288eed'

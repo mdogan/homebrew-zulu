@@ -6,7 +6,7 @@ cask 'zulu-jdk7' do
     url 'https://cdn.azul.com/zulu/bin/zulu7.52.0.11-ca-jdk7.0.332-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
-    depends_on macos: '>= :high_sierra'
+    depends_on macos: '>= :mojave'
 
   name 'Azul Zulu® JDK 7'
   homepage 'https://www.azul.com/downloads/zulu-community/'
