@@ -1,9 +1,6 @@
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.moshi.MoshiConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
+import static java.util.stream.Collectors.joining;
+import static okio.Okio.buffer;
+import static okio.Okio.sink;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,10 +9,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import static java.util.stream.Collectors.joining;
-import static okio.Okio.buffer;
-import static okio.Okio.sink;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.moshi.MoshiConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public final class Main {
   public static void main(String... args) throws IOException {
