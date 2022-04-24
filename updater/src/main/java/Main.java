@@ -80,10 +80,11 @@ public final class Main {
       w.writeUtf8("| JDK | Cask Name | Version | Build Status |\n");
       w.writeUtf8("|--|--|--|--|\n");
 
-      var sortedVersions = jdkBundles.entrySet().stream()
-        .map(e -> Map.entry(e.getKey(), e.getValue().x86().javaVersion()))
-        .sorted(Entry.comparingByKey())
-        .toList();
+      var sortedVersions =
+          jdkBundles.entrySet().stream()
+              .map(e -> Map.entry(e.getKey(), e.getValue().x86().javaVersion()))
+              .sorted(Entry.comparingByKey())
+              .toList();
       for (var e : sortedVersions) {
         var jdkVersion = e.getKey();
         w.writeUtf8(
