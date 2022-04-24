@@ -1,6 +1,9 @@
-import static java.util.stream.Collectors.joining;
-import static okio.Okio.buffer;
-import static okio.Okio.sink;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.moshi.MoshiConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,12 +11,11 @@ import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.moshi.MoshiConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
+import java.util.Map.Entry;
+
+import static java.util.stream.Collectors.joining;
+import static okio.Okio.buffer;
+import static okio.Okio.sink;
 
 public final class Main {
   public static void main(String... args) throws IOException {
@@ -38,7 +40,7 @@ public final class Main {
           w.writeUtf8("  if Hardware::CPU.intel?\n");
         }
 
-        w.writeUtf8("    version '" + x86Bundle.version() + "'\n");
+        w.writeUtf8("    version '" + x86Bundle.caskVersion() + "'\n");
         w.writeUtf8("    sha256 '" + x86Bundle.sha256_hash + "'\n\n");
         w.writeUtf8("    url '" + x86Bundle.url + "',\n");
         w.writeUtf8("        referer: 'https://www.azul.com/downloads/zulu-community/'\n\n");
@@ -46,7 +48,7 @@ public final class Main {
 
         if (armBundle != null) {
           w.writeUtf8("  else\n");
-          w.writeUtf8("    version '" + armBundle.version() + "'\n");
+          w.writeUtf8("    version '" + armBundle.caskVersion() + "'\n");
           w.writeUtf8("    sha256 '" + armBundle.sha256_hash + "'\n\n");
           w.writeUtf8("    url '" + armBundle.url + "',\n");
           w.writeUtf8("        referer: 'https://www.azul.com/downloads/zulu-community/'\n\n");
@@ -75,24 +77,30 @@ public final class Main {
     var readmeStart = readmeText.substring(0, versionHeaderIndex + VERSION_HEADER.length());
     try (var w = buffer(sink(readmeFile))) {
       w.writeUtf8(readmeStart);
-      w.writeUtf8("| JDK | Cask Name | Build Status |\n");
-      w.writeUtf8("|--|--|--|\n");
+      w.writeUtf8("| JDK | Cask Name | Version | Build Status |\n");
+      w.writeUtf8("|--|--|--|--|\n");
 
-      var sortedVersions = jdkBundles.keySet().stream().sorted().toList();
-      for (var jdkVersion : sortedVersions) {
+      var sortedVersions = jdkBundles.entrySet().stream()
+        .map(e -> Map.entry(e.getKey(), e.getValue().x86().javaVersion()))
+        .sorted(Entry.comparingByKey())
+        .toList();
+      for (var e : sortedVersions) {
+        var jdkVersion = e.getKey();
         w.writeUtf8(
             "| OpenJDK "
                 + jdkVersion
                 + " | `zulu-jdk"
                 + jdkVersion
-                + "` | [![JDK"
+                + "` | "
+                + e.getValue()
+                + " | [![JDK"
                 + jdkVersion
                 + "](https://github.com/mdogan/homebrew-zulu/workflows/JDK"
                 + jdkVersion
                 + "/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |\n");
       }
       w.writeUtf8(
-          "| Mission Control | `zulu-mc` | [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |\n");
+          "| Mission Control | `zulu-mc` | 8.1.1.51 | [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |\n");
     }
   }
 
@@ -137,15 +145,22 @@ public final class Main {
 
   public record Bundle(
       String url, String sha256_hash, List<Integer> java_version, List<Integer> zulu_version) {
-    String version() {
+    String caskVersion() {
+      var zuluString = zuluVersion();
+      var javaString = javaVersion();
+      return zuluString + "," + javaString;
+    }
+
+    String javaVersion() {
+      return java_version.stream().map(String::valueOf).collect(joining("."));
+    }
+
+    String zuluVersion() {
       var zuluString = zulu_version.stream().map(String::valueOf).collect(joining("."));
       if (zulu_version.size() > 3 && zuluString.endsWith(".0")) {
         zuluString = zuluString.substring(0, zuluString.length() - 2);
       }
-
-      var javaString = java_version.stream().map(String::valueOf).collect(joining("."));
-
-      return zuluString + "," + javaString;
+      return zuluString;
     }
   }
 
