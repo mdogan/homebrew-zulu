@@ -1,0 +1,30 @@
+name: Upgrade Casks
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  upgrade:
+    name: Upgrade Casks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - uses: gradle/gradle-build-action@v2
+        with:
+          arguments: assemble
+          build-root-directory: updater
+
+      - name: Run Updater
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: run --args='..'
+          build-root-directory: updater
