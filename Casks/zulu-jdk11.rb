@@ -1,18 +1,18 @@
 cask 'zulu-jdk11' do
 
   if Hardware::CPU.intel?
-    version '11.54.25,11.0.14.1'
-    sha256 '91b14eaf4f84b9caac2248d1a1e601ce6d7a50cb4d6f73ca64821141a22ab08b'
+    version '11.56.19,11.0.15'
+    sha256 '65deaf1bd6fcb022e46fd5348fc2ccca539228f0fe92a8ab70aed46665444058'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu11.54.25-ca-jdk11.0.14.1-macosx_x64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu11.56.19-ca-jdk11.0.15-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :mojave'
   else
-    version '11.54.25,11.0.14.1'
-    sha256 '37c12c6b01f63eac5e2a4276f6dd73603a68d60d3ca4158cdb5e21a633dd1f97'
+    version '11.56.19,11.0.15'
+    sha256 '4c1bd3bf3297ba15b6c10c3ab9cadca9babe26093a90ef561be2b45d8a40f6b4'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu11.54.25-ca-jdk11.0.14.1-macosx_aarch64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu11.56.19-ca-jdk11.0.15-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :big_sur'
