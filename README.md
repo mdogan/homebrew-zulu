@@ -11,6 +11,24 @@ brew tap mdogan/zulu
 brew install <name>
 ```
 
+### Preparing New & Updated Casks
+
+`updater` app automatically updates the Cask definitions, GitHub Action workflows, and root README with new JDKs.
+
+First, build the `updater` application:
+```
+$ cd updater
+$ ./gradlew assemble
+```
+
+Next, run the application pointing it at the root folder of this repository.
+```
+$ ./build/install/updater/bin/updater ../
+```
+
+Inspect the diff, commit the changes, and push to GitHub or create a PR.
+
+
 ## Versions
 
 | JDK | Cask Name | Build Status |
