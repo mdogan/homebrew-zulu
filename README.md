@@ -19,7 +19,7 @@ brew install <name>
 | JDK | Cask Name | Version | Build Status |
 |--|--|--|--|
 | OpenJDK 7 | `zulu-jdk7` | 7.0.352 | [![JDK7](https://github.com/mdogan/homebrew-zulu/workflows/JDK7/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
-| OpenJDK 8 | `zulu-jdk8` | 8.0.342 | [![JDK8](https://github.com/mdogan/homebrew-zulu/workflows/JDK8/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 8 | `zulu-jdk8` | 8.0.345 | [![JDK8](https://github.com/mdogan/homebrew-zulu/workflows/JDK8/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
 | OpenJDK 9 | `zulu-jdk9` | 9.0.7 | [![JDK9](https://github.com/mdogan/homebrew-zulu/workflows/JDK9/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
 | OpenJDK 10 | `zulu-jdk10` | 10.0.2 | [![JDK10](https://github.com/mdogan/homebrew-zulu/workflows/JDK10/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
 | OpenJDK 11 | `zulu-jdk11` | 11.0.16 | [![JDK11](https://github.com/mdogan/homebrew-zulu/workflows/JDK11/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
