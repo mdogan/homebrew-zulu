@@ -29,5 +29,5 @@ brew install <name>
 | OpenJDK 15 | `zulu-jdk15` | 15.0.8 | [![JDK15](https://github.com/mdogan/homebrew-zulu/workflows/JDK15/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
 | OpenJDK 16 | `zulu-jdk16` | 16.0.2 | [![JDK16](https://github.com/mdogan/homebrew-zulu/workflows/JDK16/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
 | OpenJDK 17 | `zulu-jdk17` | 17.0.4.1 | [![JDK17](https://github.com/mdogan/homebrew-zulu/workflows/JDK17/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
-| OpenJDK 18 | `zulu-jdk18` | 18.0.2 | [![JDK18](https://github.com/mdogan/homebrew-zulu/workflows/JDK18/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| OpenJDK 18 | `zulu-jdk18` | 18.0.2.1 | [![JDK18](https://github.com/mdogan/homebrew-zulu/workflows/JDK18/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
 | Mission Control | `zulu-mc` | 8.1.1.51 | [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
