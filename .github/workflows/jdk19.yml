@@ -1,4 +1,4 @@
-name: jdk19
+name: JDK19
 
 on:
   push:
