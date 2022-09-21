@@ -1,0 +1,45 @@
+name: jdk19
+
+on:
+  push:
+    branches:
+      - '**'
+    paths:
+      - 'Casks/zulu-jdk19.rb'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'Casks/zulu-jdk19.rb'
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: macos-latest
+    steps:
+
+      - name: Check out
+        uses: actions/checkout@v3
+
+      - name: brew pull & reset & tap
+        run: |
+          brew update-reset "$(brew --repository)"
+          brew update-reset "$(brew --repository homebrew/cask)"
+          mkdir -p $(brew --repo)/Library/Taps/mdogan
+          ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
+        env:
+          HOMEBREW_COLOR: 1
+          HOMEBREW_DEVELOPER: 1
+
+      - name: install jdk19
+        run: brew install zulu-jdk19
+        env:
+          HOMEBREW_COLOR: 1
+          HOMEBREW_DEVELOPER: 1
+
+      - name: uninstall jdk19
+        run: brew uninstall zulu-jdk19
+        env:
+          HOMEBREW_COLOR: 1
+          HOMEBREW_DEVELOPER: 1
