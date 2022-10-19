@@ -31,4 +31,4 @@ brew install <name>
 | OpenJDK 17 | `zulu-jdk17` | 17.0.5 | [![JDK17](https://github.com/mdogan/homebrew-zulu/workflows/JDK17/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
 | OpenJDK 18 | `zulu-jdk18` | 18.0.2.1 | [![JDK18](https://github.com/mdogan/homebrew-zulu/workflows/JDK18/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
 | OpenJDK 19 | `zulu-jdk19` | 19.0.1 | [![JDK19](https://github.com/mdogan/homebrew-zulu/workflows/JDK19/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
-| Mission Control | `zulu-mc` | 8.1.1.51 | [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| Mission Control | `zulu-mc` | 8.2.1.67 | [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |

@@ -4,7 +4,7 @@ cask 'zulu-mc' do
   homepage 'https://www.azul.com/products/zulu-mission-control/'
 
   if Hardware::CPU.intel?
-    version '8.1.1.51-ca'
+    version '8.2.1.67-ca'
     sha256 :no_check
 
     url "https://cdn.azul.com/zmc/bin/zmc#{version}-macos_x64.tar.gz",
