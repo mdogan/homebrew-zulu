@@ -102,9 +102,12 @@ public final class Main {
                 + e.getValue()
                 + " | [![JDK"
                 + jdkVersion
-                + "](https://github.com/mdogan/homebrew-zulu/workflows/JDK"
+                + "](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk"
                 + jdkVersion
-                + "/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |\n");
+                + ".yml/badge.svg?branch=master&event=push)]"
+                + "(https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk"
+                + jdkVersion
+                + ".yml) |\n");
       }
       w.writeUtf8(
           "| Mission Control | `zulu-mc` | 8.2.1.67 | [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |\n");
