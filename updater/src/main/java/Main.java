@@ -104,8 +104,7 @@ public final class Main {
                 + jdkVersion
                 + "](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk"
                 + jdkVersion
-                + ".yml/badge.svg?branch=master&event=push)]"
-                + "(https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk"
+                + ".yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk"
                 + jdkVersion
                 + ".yml) |\n");
       }
