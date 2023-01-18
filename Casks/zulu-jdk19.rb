@@ -1,18 +1,18 @@
 cask 'zulu-jdk19' do
 
   if Hardware::CPU.intel?
-    version '19.30.11,19.0.1'
-    sha256 'cd3669020312b1ff584ddb96a6d270f84f8ec2523d514b26ed188a41c7f280d6'
+    version '19.32.13,19.0.2'
+    sha256 '44a4fad67f32f7e7a886ffce0d7d523de30b552e8e81c1e25af5c2fdef762f66'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu19.30.11-ca-jdk19.0.1-macosx_x64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :mojave'
   else
-    version '19.30.11,19.0.1'
-    sha256 'b90964ba680a64f793c9bd464193f0f37dc81509ffcd52b96526df75fb901ae6'
+    version '19.32.13,19.0.2'
+    sha256 '12f7ae5c2734962255ca0bb47ce71c0bae34720e6af1f84377250ff074bd907a'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu19.30.11-ca-jdk19.0.1-macosx_aarch64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :big_sur'
