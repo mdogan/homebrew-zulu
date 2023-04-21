@@ -19,7 +19,7 @@ brew install <name>
 | JDK | Cask Name | Version | Build Status |
 |--|--|--|--|
 | OpenJDK 7 | `zulu-jdk7` | 7.0.352 | [![JDK7](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk7.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk7.yml) |
-| OpenJDK 8 | `zulu-jdk8` | 8.0.362 | [![JDK8](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk8.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk8.yml) |
+| OpenJDK 8 | `zulu-jdk8` | 8.0.372 | [![JDK8](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk8.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk8.yml) |
 | OpenJDK 9 | `zulu-jdk9` | 9.0.7 | [![JDK9](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk9.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk9.yml) |
 | OpenJDK 10 | `zulu-jdk10` | 10.0.2 | [![JDK10](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk10.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk10.yml) |
 | OpenJDK 11 | `zulu-jdk11` | 11.0.18 | [![JDK11](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk11.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk11.yml) |
