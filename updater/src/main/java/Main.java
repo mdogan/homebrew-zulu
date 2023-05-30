@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -114,7 +115,10 @@ public final class Main {
   }
 
   private static Map<Integer, BundleSet> loadJdks() throws IOException {
-    var okhttp = new OkHttpClient();
+    OkHttpClient.Builder builder = new OkHttpClient.Builder();
+    builder.connectTimeout(30, TimeUnit.SECONDS);
+    builder.readTimeout(30, TimeUnit.SECONDS);
+    var okhttp = builder.build();
     var retrofit =
         new Retrofit.Builder()
             .baseUrl("https://api.azul.com/zulu/download/community/v1.0/")
