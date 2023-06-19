@@ -148,7 +148,12 @@ public final class Main {
     return jdkPackages;
   }
 
-  public record Package(String package_uuid, String sha256_hash, String download_url, List<Integer> java_version, List<Integer> distro_version) {
+  public record Package(
+      String package_uuid,
+      String sha256_hash,
+      String download_url,
+      List<Integer> java_version,
+      List<Integer> distro_version) {
     String caskVersion() {
       var zuluString = zuluVersion();
       var javaString = javaVersion();
@@ -171,8 +176,10 @@ public final class Main {
   record PackageSet(Package x86, Package arm) {}
 
   public interface AzulMetadataService {
-    @GET("?availability_type=ca&os=macos&archive_type=dmg&java_package_type=jdk&javafx_bundled=false&release_status=ga&latest=true")
-    Call<List<Package>> latestPackages(@Query("java_version") int version, @Query("arch") String architecture);
+    @GET(
+        "?availability_type=ca&os=macos&archive_type=dmg&java_package_type=jdk&javafx_bundled=false&release_status=ga&latest=true")
+    Call<List<Package>> latestPackages(
+        @Query("java_version") int version, @Query("arch") String architecture);
 
     @GET("{package_uuid}")
     Call<Package> packageDetails(@Path("package_uuid") String packageUUID);
