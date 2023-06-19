@@ -15,6 +15,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public final class Main {
@@ -26,38 +27,31 @@ public final class Main {
     var caskDir = repoDir.resolve("Casks");
     var workflowsDir = repoDir.resolve(".github/workflows");
 
-    Map<Integer, BundleSet> jdkBundles = loadJdks();
-    for (var entry : jdkBundles.entrySet()) {
+    Map<Integer, PackageSet> jdkPackages = loadJdks();
+    for (var entry : jdkPackages.entrySet()) {
       int jdkVersion = entry.getKey();
-      var x86Bundle = entry.getValue().x86;
-      var armBundle = entry.getValue().arm;
-
-      if ("12.0.2".equals(x86Bundle.javaVersion()) && "12.3.11".equals(x86Bundle.zuluVersion())) {
-        System.err.println(
-            "Skipping JDK 12.0.2, because this version is changing back and forth between zulu12.3.11 and zulu12.3.11_2 => "
-                + x86Bundle);
-        continue;
-      }
+      var x86Package = entry.getValue().x86;
+      var armPackage = entry.getValue().arm;
 
       var caskFile = caskDir.resolve("zulu-jdk" + jdkVersion + ".rb");
       try (var w = buffer(sink(caskFile))) {
         w.writeUtf8("cask 'zulu-jdk" + jdkVersion + "' do\n\n");
 
-        if (armBundle != null) {
+        if (armPackage != null) {
           w.writeUtf8("  if Hardware::CPU.intel?\n");
         }
 
-        w.writeUtf8("    version '" + x86Bundle.caskVersion() + "'\n");
-        w.writeUtf8("    sha256 '" + x86Bundle.sha256_hash + "'\n\n");
-        w.writeUtf8("    url '" + x86Bundle.url + "',\n");
+        w.writeUtf8("    version '" + x86Package.caskVersion() + "'\n");
+        w.writeUtf8("    sha256 '" + x86Package.sha256_hash + "'\n\n");
+        w.writeUtf8("    url '" + x86Package.download_url + "',\n");
         w.writeUtf8("        referer: 'https://www.azul.com/downloads/zulu-community/'\n\n");
         w.writeUtf8("    depends_on macos: '>= :mojave'\n");
 
-        if (armBundle != null) {
+        if (armPackage != null) {
           w.writeUtf8("  else\n");
-          w.writeUtf8("    version '" + armBundle.caskVersion() + "'\n");
-          w.writeUtf8("    sha256 '" + armBundle.sha256_hash + "'\n\n");
-          w.writeUtf8("    url '" + armBundle.url + "',\n");
+          w.writeUtf8("    version '" + armPackage.caskVersion() + "'\n");
+          w.writeUtf8("    sha256 '" + armPackage.sha256_hash + "'\n\n");
+          w.writeUtf8("    url '" + armPackage.download_url + "',\n");
           w.writeUtf8("        referer: 'https://www.azul.com/downloads/zulu-community/'\n\n");
           w.writeUtf8("    depends_on macos: '>= :big_sur'\n");
           w.writeUtf8("  end\n");
@@ -88,7 +82,7 @@ public final class Main {
       w.writeUtf8("|--|--|--|--|\n");
 
       var sortedVersions =
-          jdkBundles.entrySet().stream()
+          jdkPackages.entrySet().stream()
               .map(e -> Map.entry(e.getKey(), e.getValue().x86().javaVersion()))
               .sorted(Entry.comparingByKey())
               .toList();
@@ -114,38 +108,36 @@ public final class Main {
     }
   }
 
-  private static Map<Integer, BundleSet> loadJdks() throws IOException {
+  private static Map<Integer, PackageSet> loadJdks() throws IOException {
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
     builder.connectTimeout(30, TimeUnit.SECONDS);
     builder.readTimeout(30, TimeUnit.SECONDS);
     var okhttp = builder.build();
     var retrofit =
         new Retrofit.Builder()
-            .baseUrl("https://api.azul.com/zulu/download/community/v1.0/")
+            .baseUrl("https://api.azul.com/metadata/v1/zulu/packages/")
             .client(okhttp)
             .addConverterFactory(MoshiConverterFactory.create())
             .build();
-    var service = retrofit.create(ZuluDiscoveryService.class);
+    var service = retrofit.create(AzulMetadataService.class);
 
-    var jdkBundles = new LinkedHashMap<Integer, BundleSet>();
+    var jdkPackages = new LinkedHashMap<Integer, PackageSet>();
     int jdkVersion = MINIMUM_JDK_VERSION;
     while (true) {
-      var x86Response = service.latestBundle(jdkVersion, "x86").execute();
-      var x86Bundle = x86Response.isSuccessful() ? x86Response.body() : null;
-      System.out.println(jdkVersion + " x86 " + x86Bundle);
+      var x86PackageDetails = service.getPackageDetails(jdkVersion, "x86");
+      System.out.println(jdkVersion + " x86 " + x86PackageDetails);
 
-      var armResponse = service.latestBundle(jdkVersion, "arm").execute();
-      var armBundle = armResponse.isSuccessful() ? armResponse.body() : null;
-      System.out.println(jdkVersion + " ARM " + armBundle);
+      var armPackageDetails = service.getPackageDetails(jdkVersion, "arm");
+      System.out.println(jdkVersion + " ARM " + armPackageDetails);
 
-      if (x86Bundle == null) {
-        if (armBundle == null) {
+      if (x86PackageDetails == null) {
+        if (armPackageDetails == null) {
           break;
         }
         throw new IllegalStateException("JDK " + jdkVersion + " missing x86 arch");
       }
 
-      jdkBundles.put(jdkVersion, new BundleSet(x86Bundle, armBundle));
+      jdkPackages.put(jdkVersion, new PackageSet(x86PackageDetails, armPackageDetails));
       jdkVersion++;
     }
 
@@ -153,11 +145,15 @@ public final class Main {
     okhttp.dispatcher().executorService().shutdown();
     okhttp.connectionPool().evictAll();
 
-    return jdkBundles;
+    return jdkPackages;
   }
 
-  public record Bundle(
-      String url, String sha256_hash, List<Integer> java_version, List<Integer> zulu_version) {
+  public record Package(
+      String package_uuid,
+      String sha256_hash,
+      String download_url,
+      List<Integer> java_version,
+      List<Integer> distro_version) {
     String caskVersion() {
       var zuluString = zuluVersion();
       var javaString = javaVersion();
@@ -169,20 +165,37 @@ public final class Main {
     }
 
     String zuluVersion() {
-      var zuluString = zulu_version.stream().map(String::valueOf).collect(joining("."));
-      if (zulu_version.size() > 3 && zuluString.endsWith(".0")) {
+      var zuluString = distro_version.stream().map(String::valueOf).collect(joining("."));
+      if (distro_version.size() > 3 && zuluString.endsWith(".0")) {
         zuluString = zuluString.substring(0, zuluString.length() - 2);
       }
       return zuluString;
     }
   }
 
-  record BundleSet(Bundle x86, Bundle arm) {}
+  record PackageSet(Package x86, Package arm) {}
 
-  interface ZuluDiscoveryService {
-    @GET("bundles/latest/?os=macos&ext=dmg&bundle_type=jdk&javafx=false&release_status=ga")
-    Call<Bundle> latestBundle(
+  public interface AzulMetadataService {
+    @GET(
+        "?availability_type=ca&os=macos&archive_type=dmg&java_package_type=jdk&javafx_bundled=false&release_status=ga&latest=true")
+    Call<List<Package>> latestPackages(
         @Query("java_version") int version, @Query("arch") String architecture);
+
+    @GET("{package_uuid}")
+    Call<Package> packageDetails(@Path("package_uuid") String packageUUID);
+
+    default Package getPackageDetails(int version, String architecture) throws IOException {
+      var response = this.latestPackages(version, architecture).execute();
+      var latestPackages = response.isSuccessful() ? response.body() : null;
+
+      if (latestPackages == null || latestPackages.isEmpty()) return null;
+
+      // Data are sorted, with the newest packages being returned first.
+      var latestPackage = latestPackages.get(0);
+
+      var packageDetailsResponse = this.packageDetails(latestPackage.package_uuid).execute();
+      return packageDetailsResponse.isSuccessful() ? packageDetailsResponse.body() : null;
+    }
   }
 
   private static final int MINIMUM_JDK_VERSION = 7;
