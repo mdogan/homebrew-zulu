@@ -33,6 +33,13 @@ public final class Main {
       var x86Package = entry.getValue().x86;
       var armPackage = entry.getValue().arm;
 
+      if ("12.0.2".equals(x86Package.javaVersion()) && "12.3.11".equals(x86Package.zuluVersion())) {
+        System.err.println(
+            "Skipping JDK 12.0.2, because this version is changing back and forth between zulu12.3.11 and zulu12.3.11_2 => "
+                + x86Package);
+        continue;
+      }
+
       var caskFile = caskDir.resolve("zulu-jdk" + jdkVersion + ".rb");
       try (var w = buffer(sink(caskFile))) {
         w.writeUtf8("cask 'zulu-jdk" + jdkVersion + "' do\n\n");
