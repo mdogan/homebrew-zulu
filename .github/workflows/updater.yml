@@ -3,7 +3,7 @@ name: Updater
 on:
   push:
     branches:
-      - '**'
+      - master
     paths:
       - 'updater/**'
   pull_request:

@@ -214,7 +214,7 @@ name: JDK{VERSION}
 on:
   push:
     branches:
-      - '**'
+      - master
     paths:
       - 'Casks/zulu-jdk{VERSION}.rb'
   pull_request:

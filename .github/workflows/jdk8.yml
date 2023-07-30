@@ -3,7 +3,7 @@ name: JDK8
 on:
   push:
     branches:
-      - '**'
+      - master
     paths:
       - 'Casks/zulu-jdk8.rb'
   pull_request:

@@ -3,7 +3,7 @@ name: MissionControl
 on:
   push:
     branches:
-      - '**'
+      - master
     paths:
       - 'Casks/zulu-mc.rb'
   pull_request:

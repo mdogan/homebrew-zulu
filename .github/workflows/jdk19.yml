@@ -3,7 +3,7 @@ name: JDK19
 on:
   push:
     branches:
-      - '**'
+      - master
     paths:
       - 'Casks/zulu-jdk19.rb'
   pull_request:
