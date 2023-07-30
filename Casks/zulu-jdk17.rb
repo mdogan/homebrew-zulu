@@ -10,9 +10,9 @@ cask 'zulu-jdk17' do
     depends_on macos: '>= :mojave'
   else
     version '17.44.15,17.0.8'
-    sha256 'b939350c5901fd8027356d03ecd2614526a1f682a4cf030ab440aa50b3165ef5'
+    sha256 '35d5bf045579a08110b91a8e37cda859cda021b1ef7dc4ef8a97b79a14147d60'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu17.44.15-ca-jdk17.0.8-macosx_aarch64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu17.44.15_1-ca-jdk17.0.8-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :big_sur'
