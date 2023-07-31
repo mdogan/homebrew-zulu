@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -19,6 +20,13 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public final class Main {
+
+  // Zulu respin versions.
+  // They update the same bundle version after fixing some packaging issues.
+  // Respin versions have a number suffix after an underscore: `_1`, `_2` etc.
+  private static final Set<String> respinVersions =
+      Set.of("11.66.15", "12.3.11", "17.44.15", "20.32.11");
+
   public static void main(String... args) throws IOException {
     var repoDir = Paths.get(args[0]).toAbsolutePath().normalize();
     System.out.println("Repository dir: " + repoDir);
@@ -33,9 +41,9 @@ public final class Main {
       var x86Package = entry.getValue().x86;
       var armPackage = entry.getValue().arm;
 
-      if ("12.0.2".equals(x86Package.javaVersion()) && "12.3.11".equals(x86Package.zuluVersion())) {
+      if (respinVersions.contains(x86Package.zuluVersion())) {
         System.err.println(
-            "Skipping JDK 12.0.2, because this version is changing back and forth between zulu12.3.11 and zulu12.3.11_2 => "
+            "Skipping bundle because this is a respin version of an existing package => "
                 + x86Package);
         continue;
       }
