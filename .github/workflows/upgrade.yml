@@ -9,6 +9,7 @@ jobs:
   upgrade:
     name: Upgrade Casks
     runs-on: ubuntu-latest
+    if: github.repository == 'mdogan/homebrew-zulu'
     steps:
       - uses: actions/checkout@v4
 
@@ -28,7 +29,7 @@ jobs:
         id: generate_token
         with:
           app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}    
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
