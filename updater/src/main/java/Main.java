@@ -239,7 +239,7 @@ jobs:
     steps:
 
       - name: Check out
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: brew pull & reset & tap
         run: |
