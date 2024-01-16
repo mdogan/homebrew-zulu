@@ -2,7 +2,7 @@
 retrofit = "2.9.0"
 
 [plugins]
-spotless = { id = "com.diffplug.spotless", version = "6.22.0" }
+spotless = { id = "com.diffplug.spotless", version = "6.24.0" }
 
 [libraries]
 retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
