@@ -17,6 +17,9 @@ jobs:
   build:
     name: Build
     runs-on: macos-latest
+    env:
+      HOMEBREW_COLOR: 1
+      HOMEBREW_DEVELOPER: 1
     steps:
 
       - name: Check out
@@ -28,12 +31,6 @@ jobs:
           brew update-reset "$(brew --repository homebrew/cask)"
           mkdir -p $(brew --repo)/Library/Taps/mdogan
           ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
-        env:
-          HOMEBREW_COLOR: 1
-          HOMEBREW_DEVELOPER: 1
 
       - name: install mission control
         run: brew install zulu-mc
-        env:
-          HOMEBREW_COLOR: 1
-          HOMEBREW_DEVELOPER: 1

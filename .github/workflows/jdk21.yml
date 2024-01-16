@@ -5,11 +5,13 @@ on:
     branches:
       - master
     paths:
+      - '.github/workflows/jdk21.yml'
       - 'Casks/zulu-jdk21.rb'
   pull_request:
     branches:
       - master
     paths:
+      - '.github/workflows/jdk21.yml'
       - 'Casks/zulu-jdk21.rb'
 
 jobs:
@@ -17,6 +19,9 @@ jobs:
   build:
     name: Build
     runs-on: macos-latest
+    env:
+      HOMEBREW_COLOR: 1
+      HOMEBREW_DEVELOPER: 1
     steps:
 
       - name: Check out
@@ -28,18 +33,9 @@ jobs:
           brew update-reset "$(brew --repository homebrew/cask)"
           mkdir -p $(brew --repo)/Library/Taps/mdogan
           ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
-        env:
-          HOMEBREW_COLOR: 1
-          HOMEBREW_DEVELOPER: 1
 
       - name: install jdk21
         run: brew install zulu-jdk21
-        env:
-          HOMEBREW_COLOR: 1
-          HOMEBREW_DEVELOPER: 1
 
       - name: uninstall jdk21
         run: brew uninstall zulu-jdk21
-        env:
-          HOMEBREW_COLOR: 1
-          HOMEBREW_DEVELOPER: 1
