@@ -5,11 +5,13 @@ on:
     branches:
       - master
     paths:
+      - '.github/workflows/updater.yml'
       - 'updater/**'
   pull_request:
     branches:
       - master
     paths:
+      - '.github/workflows/updater.yml'
       - 'updater/**'
 
 jobs:
@@ -27,6 +29,8 @@ jobs:
           java-version: 17
 
       - uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
-          build-root-directory: updater
+
+      - name: Build
+        run: |
+          cd updater
+          ./gradlew build

@@ -18,11 +18,12 @@ jobs:
           distribution: 'zulu'
           java-version: 17
 
+      - uses: gradle/gradle-build-action@v2
+
       - name: Run Updater
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: run --args='..'
-          build-root-directory: updater
+        run: |
+          cd updater
+          ./gradlew run --args='..'
 
       - name: Generate Github Token
         uses: tibdex/github-app-token@v2
