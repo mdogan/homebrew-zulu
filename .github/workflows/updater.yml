@@ -5,11 +5,13 @@ on:
     branches:
       - master
     paths:
+      - '.github/workflows/updater.yml'
       - 'updater/**'
   pull_request:
     branches:
       - master
     paths:
+      - '.github/workflows/updater.yml'
       - 'updater/**'
 
 jobs:
@@ -21,12 +23,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: gradle/wrapper-validation-action@v1
 
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 17
 
       - uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
-          build-root-directory: updater
+
+      - name: Build
+        run: |
+          cd updater
+          ./gradlew build

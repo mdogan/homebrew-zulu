@@ -5,11 +5,13 @@ on:
     branches:
       - master
     paths:
+      - '.github/workflows/jdk20.yml'
       - 'Casks/zulu-jdk20.rb'
   pull_request:
     branches:
       - master
     paths:
+      - '.github/workflows/jdk20.yml'
       - 'Casks/zulu-jdk20.rb'
 
 jobs:
@@ -34,12 +36,6 @@ jobs:
 
       - name: install jdk20
         run: brew install zulu-jdk20
-        env:
-          HOMEBREW_COLOR: 1
-          HOMEBREW_DEVELOPER: 1
 
       - name: uninstall jdk20
         run: brew uninstall zulu-jdk20
-        env:
-          HOMEBREW_COLOR: 1
-          HOMEBREW_DEVELOPER: 1
