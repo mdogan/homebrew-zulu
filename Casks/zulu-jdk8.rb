@@ -1,18 +1,18 @@
 cask 'zulu-jdk8' do
 
   if Hardware::CPU.intel?
-    version '8.74.0.17,8.0.392'
-    sha256 '843112f7543ea191c044b20f51ecdf7a3e17e3615b83e826d5b550820892228e'
+    version '8.76.0.17,8.0.402'
+    sha256 '0829cc9137818b28cdff1a805f6cd7527fe806a59ef09640b3c2fb22852c886d'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu8.74.0.17-ca-jdk8.0.392-macosx_x64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu8.76.0.17-ca-jdk8.0.402-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :mojave'
   else
-    version '8.74.0.17,8.0.392'
-    sha256 'aa4126185a8b7c2d2f1b923ae5db216c5cd2e58a4072f39fed0e3db04acee4f2'
+    version '8.76.0.17,8.0.402'
+    sha256 '8fbb9378a8900047fab8c9b6d988d562d5fb39dfb595bef4ba9746f3b41aa8f1'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu8.74.0.17-ca-jdk8.0.392-macosx_aarch64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu8.76.0.17-ca-jdk8.0.402-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :big_sur'
