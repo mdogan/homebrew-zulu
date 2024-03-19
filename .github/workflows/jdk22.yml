@@ -1,0 +1,41 @@
+name: JDK22
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/jdk22.yml'
+      - 'Casks/zulu-jdk22.rb'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/jdk22.yml'
+      - 'Casks/zulu-jdk22.rb'
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: macos-latest
+    env:
+      HOMEBREW_COLOR: 1
+      HOMEBREW_DEVELOPER: 1
+    steps:
+
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: brew pull & reset & tap
+        run: |
+          brew update-reset "$(brew --repository)"
+          brew update-reset "$(brew --repository homebrew/cask)"
+          mkdir -p $(brew --repo)/Library/Taps/mdogan
+          ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
+
+      - name: install jdk22
+        run: brew install zulu-jdk22
+
+      - name: uninstall jdk22
+        run: brew uninstall zulu-jdk22
