@@ -1,18 +1,18 @@
 cask 'zulu-jdk22' do
 
   if Hardware::CPU.intel?
-    version '22.28.91,22.0.0'
-    sha256 '7ca4fb27667b8ed222df4e0f4a384c1b390abf5a7520c690311b4cc24003c50e'
+    version '22.30.13,22.0.1'
+    sha256 '3b701be23abf01cbd69a9658148ec9edc362dc9f78b3a1dfe7874443e9489c46'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-macosx_x64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :mojave'
   else
-    version '22.28.91,22.0.0'
-    sha256 '97f9f95c4674d78d0541cff740795562d3bfb317d3867108f3d7f94689979bd4'
+    version '22.30.13,22.0.1'
+    sha256 '2af2bd4f8f15f3e0e2d5abc899985cc187d15b35265841a9256c182fb3faaa0d'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-macosx_aarch64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :big_sur'
