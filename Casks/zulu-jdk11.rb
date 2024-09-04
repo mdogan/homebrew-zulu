@@ -1,6 +1,6 @@
 cask 'zulu-jdk11' do
 
-  if Hardware::CPU.intel?
+  on_intel do
     version '11.74.15,11.0.24'
     sha256 '7c8e9cc1ee9b62f3faa902fae0f860578d833d2f0c9cd7c8a1ea84b6fd4cddf1'
 
@@ -8,7 +8,8 @@ cask 'zulu-jdk11' do
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :mojave'
-  else
+  end
+  on_arm do
     version '11.74.15,11.0.24'
     sha256 'cc3848ec9a540ed445f21264a05d82f2a8207e26f0e4a311fed23550873468f8'
 

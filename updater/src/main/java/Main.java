@@ -53,7 +53,7 @@ public final class Main {
         w.writeUtf8("cask 'zulu-jdk" + jdkVersion + "' do\n\n");
 
         if (armPackage != null) {
-          w.writeUtf8("  if Hardware::CPU.intel?\n");
+          w.writeUtf8("  on_intel do\n");
         }
 
         w.writeUtf8("    version '" + x86Package.caskVersion() + "'\n");
@@ -63,7 +63,8 @@ public final class Main {
         w.writeUtf8("    depends_on macos: '>= :mojave'\n");
 
         if (armPackage != null) {
-          w.writeUtf8("  else\n");
+          w.writeUtf8("  end\n");
+          w.writeUtf8("  on_arm do\n");
           w.writeUtf8("    version '" + armPackage.caskVersion() + "'\n");
           w.writeUtf8("    sha256 '" + armPackage.sha256_hash + "'\n\n");
           w.writeUtf8("    url '" + armPackage.download_url + "',\n");
@@ -235,9 +236,16 @@ on:
 
 jobs:
 
-  build:
-    name: Build
-    runs-on: macos-latest
+  check:
+    name: Check
+    strategy:
+      matrix:
+        os:
+          # macos-latest is based on arm64.
+          - macos-latest
+          # macos-12 is based on x64.
+          - macos-12
+    runs-on: ${{ matrix.os }}
     env:
       HOMEBREW_COLOR: 1
       HOMEBREW_DEVELOPER: 1

@@ -1,6 +1,6 @@
 cask 'zulu-jdk19' do
 
-  if Hardware::CPU.intel?
+  on_intel do
     version '19.32.13,19.0.2'
     sha256 '44a4fad67f32f7e7a886ffce0d7d523de30b552e8e81c1e25af5c2fdef762f66'
 
@@ -8,7 +8,8 @@ cask 'zulu-jdk19' do
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :mojave'
-  else
+  end
+  on_arm do
     version '19.32.13,19.0.2'
     sha256 '12f7ae5c2734962255ca0bb47ce71c0bae34720e6af1f84377250ff074bd907a'
 

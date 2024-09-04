@@ -1,6 +1,6 @@
 cask 'zulu-jdk8' do
 
-  if Hardware::CPU.intel?
+  on_intel do
     version '8.80.0.17,8.0.422'
     sha256 '9245a081d1a868e84655264c687ba615814ea2dc7ed73586ef7cbf0487f95272'
 
@@ -8,7 +8,8 @@ cask 'zulu-jdk8' do
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :mojave'
-  else
+  end
+  on_arm do
     version '8.80.0.17,8.0.422'
     sha256 'ac209ca5cdac5386271572bbf287298483d12dd079fe01323d62353ae1418f43'
 
