@@ -1,0 +1,48 @@
+name: JDK23
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/jdk23.yml'
+      - 'Casks/zulu-jdk23.rb'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/jdk23.yml'
+      - 'Casks/zulu-jdk23.rb'
+
+jobs:
+
+  check:
+    name: Check
+    strategy:
+      matrix:
+        os:
+          # macos-latest is based on arm64.
+          - macos-latest
+          # macos-12 is based on x64.
+          - macos-12
+    runs-on: ${{ matrix.os }}
+    env:
+      HOMEBREW_COLOR: 1
+      HOMEBREW_DEVELOPER: 1
+    steps:
+
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: brew pull & reset & tap
+        run: |
+          brew update-reset "$(brew --repository)"
+          brew update-reset "$(brew --repository homebrew/cask)"
+          mkdir -p $(brew --repo)/Library/Taps/mdogan
+          ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
+
+      - name: install jdk23
+        run: brew install zulu-jdk23
+
+      - name: uninstall jdk23
+        run: brew uninstall zulu-jdk23
