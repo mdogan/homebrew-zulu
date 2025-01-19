@@ -243,8 +243,8 @@ jobs:
         os:
           # macos-latest is based on arm64.
           - macos-latest
-          # macos-12 is based on x64.
-          - macos-12
+          # macos-13 is based on x64.
+          - macos-13
     runs-on: ${{ matrix.os }}
     env:
       HOMEBREW_COLOR: 1
