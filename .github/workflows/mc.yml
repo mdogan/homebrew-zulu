@@ -5,18 +5,27 @@ on:
     branches:
       - master
     paths:
+      - '.github/workflows/mc.yml'
       - 'Casks/zulu-mc.rb'
   pull_request:
     branches:
       - master
     paths:
+      - '.github/workflows/mc.yml'
       - 'Casks/zulu-mc.rb'
 
 jobs:
 
-  build:
-    name: Build
-    runs-on: macos-latest
+  check:
+    name: Check
+    strategy:
+      matrix:
+        os:
+          # macos-latest is based on arm64.
+          - macos-latest
+          # macos-13 is based on x64.
+          - macos-13
+    runs-on: ${{ matrix.os }}
     env:
       HOMEBREW_COLOR: 1
       HOMEBREW_DEVELOPER: 1
