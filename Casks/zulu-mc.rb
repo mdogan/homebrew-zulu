@@ -3,7 +3,7 @@ cask 'zulu-mc' do
   name 'Zulu® Mission Control'
   homepage 'https://www.azul.com/products/zulu-mission-control/'
 
-  if Hardware::CPU.intel?
+  on_intel do
     version '8.3.1.81-ca'
     sha256 :no_check
 
@@ -13,8 +13,8 @@ cask 'zulu-mc' do
     depends_on macos: '>= :mojave'
 
     app "zmc#{version}-macos_x64/Azul Mission Control.app"
-
-  else
+  end
+  on_arm do
     version '8.3.1.81-ca'
     sha256 :no_check
 
@@ -24,6 +24,6 @@ cask 'zulu-mc' do
     depends_on macos: '>= :big_sur'
 
     app "zmc#{version}-macos_aarch64/Azul Mission Control.app"
-  end  
+  end
 
 end

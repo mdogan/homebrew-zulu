@@ -16,9 +16,19 @@ on:
 
 jobs:
 
-  build:
-    name: Build
-    runs-on: macos-latest
+  check:
+    name: Check
+    strategy:
+      matrix:
+        os:
+          # macos-latest is based on arm64.
+          - macos-latest
+          # macos-13 is based on x64.
+          - macos-13
+    runs-on: ${{ matrix.os }}
+    env:
+      HOMEBREW_COLOR: 1
+      HOMEBREW_DEVELOPER: 1
     steps:
 
       - name: Check out
@@ -30,9 +40,6 @@ jobs:
           brew update-reset "$(brew --repository homebrew/cask)"
           mkdir -p $(brew --repo)/Library/Taps/mdogan
           ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
-        env:
-          HOMEBREW_COLOR: 1
-          HOMEBREW_DEVELOPER: 1
 
       - name: install jdk20
         run: brew install zulu-jdk20
