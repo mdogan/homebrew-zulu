@@ -16,9 +16,9 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 17
+          java-version: 21
 
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/actions/setup-gradle@v4
 
       - name: Run Updater
         run: |
@@ -33,9 +33,9 @@ jobs:
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ steps.generate_token.outputs.token }}
+          branch-token: ${{ steps.generate_token.outputs.token }}
           commit-message: Upgrade JDK Casks to the latest versions
           title: Upgrade JDK Casks
           body: |
