@@ -7,7 +7,7 @@ First, check out the `updater` directory:
 cd updater
 ```
 
-Next, run the application via Gradle.
+Next, run the application via Gradle:
 ```sh
 ./gradlew run --args='..'
 ```
