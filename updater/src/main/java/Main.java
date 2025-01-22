@@ -235,8 +235,14 @@ on:
       - 'Casks/zulu-jdk{VERSION}.rb'
 
 jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
   check:
-    uses: mdogan/homebrew-zulu/.github/workflows/reusable-cask-checks.yml@master
+    needs: checkout
+    uses: ./.github/workflows/reusable-cask-checks.yml
     with:
       jdk-version: {VERSION}
 """;
