@@ -21,6 +21,7 @@ jobs:
       HOMEBREW_COLOR: 1
       HOMEBREW_DEVELOPER: 1
     steps:
+      - uses: actions/checkout@v4
       - name: brew pull & reset & tap
         run: |
           brew update-reset "$(brew --repository)"
