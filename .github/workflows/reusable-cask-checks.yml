@@ -9,7 +9,6 @@ on:
 
 jobs:
   check:
-    name: Check
     strategy:
       matrix:
         os:

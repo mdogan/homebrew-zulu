@@ -235,36 +235,9 @@ on:
       - 'Casks/zulu-jdk{VERSION}.rb'
 
 jobs:
-
   check:
-    name: Check
-    strategy:
-      matrix:
-        os:
-          # macos-latest is based on arm64.
-          - macos-latest
-          # macos-13 is based on x64.
-          - macos-13
-    runs-on: ${{ matrix.os }}
-    env:
-      HOMEBREW_COLOR: 1
-      HOMEBREW_DEVELOPER: 1
-    steps:
-
-      - name: Check out
-        uses: actions/checkout@v4
-
-      - name: brew pull & reset & tap
-        run: |
-          brew update-reset "$(brew --repository)"
-          brew update-reset "$(brew --repository homebrew/cask)"
-          mkdir -p $(brew --repo)/Library/Taps/mdogan
-          ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
-
-      - name: install jdk{VERSION}
-        run: brew install zulu-jdk{VERSION}
-
-      - name: uninstall jdk{VERSION}
-        run: brew uninstall zulu-jdk{VERSION}
+    uses: goooler/homebrew-zulu/.github/workflows/reusable-cask-checks.yml@master
+    with:
+      jdk-version: {VERSION}
 """;
 }
