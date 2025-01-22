@@ -85,7 +85,10 @@ public final class Main {
       }
 
       var workflowFile = workflowsDir.resolve("jdk" + jdkVersion + ".yml");
-      var workflow = WORKFLOW_TEMPLATE.replace("{VERSION}", String.valueOf(jdkVersion));
+      var workflow =
+          WORKFLOW_TEMPLATE
+              .replace("{VERSION}", String.valueOf(jdkVersion))
+              .replace("{REUSABLE_WORKFLOW}", REUSABLE_WORKFLOW);
       Files.writeString(workflowFile, workflow);
     }
 
@@ -216,6 +219,7 @@ public final class Main {
 
   private static final int MINIMUM_JDK_VERSION = 7;
   private static final String VERSION_HEADER = "## Versions\n\n";
+  private static final String REUSABLE_WORKFLOW = ".github/workflows/reusable-cask-checks.yml";
   private static final String WORKFLOW_TEMPLATE =
       """
 name: JDK{VERSION}
@@ -225,16 +229,17 @@ on:
     branches:
       - master
     paths:
-      - '.github/workflows/reusable-cask-checks.yml'
+      - '{REUSABLE_WORKFLOW}'
       - 'Casks/zulu-jdk{VERSION}.rb'
   pull_request:
     branches:
       - master
     paths:
-      - '.github/workflows/reusable-cask-checks.yml'
+      - '{REUSABLE_WORKFLOW}'
       - 'Casks/zulu-jdk{VERSION}.rb'
 
 jobs:
+  # This step is necessary for using `./github/workflows/*.yml` on the current branch, and it could be run on `ubuntu-latest`.
   checkout:
     runs-on: ubuntu-latest
     steps:
@@ -242,7 +247,7 @@ jobs:
 
   check:
     needs: checkout
-    uses: ./.github/workflows/reusable-cask-checks.yml
+    uses: ./{REUSABLE_WORKFLOW}
     with:
       jdk-version: {VERSION}
 """;
