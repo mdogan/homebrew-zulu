@@ -1,19 +1,19 @@
 cask 'zulu-jdk11' do
 
   on_intel do
-    version '11.76.21,11.0.25'
-    sha256 'f3f1d72338b4ad7f73827ffaf9743980f2b9fc3354cab57cce9c768c37b6e50e'
+    version '11.78.15,11.0.26'
+    sha256 '588e3ef0bbe4dd67f4335aa24f2db3e128318ba4e1e2eda1041c6091bae82634'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu11.76.21-ca-jdk11.0.25-macosx_x64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu11.78.15-ca-jdk11.0.26-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :mojave'
   end
   on_arm do
-    version '11.76.21,11.0.25'
-    sha256 '771a0ae51b9521e7f1cf7e00bf34080632eb7331ed145c618c4b36b6f41c7040'
+    version '11.78.15,11.0.26'
+    sha256 'a1accfa45e1569f7b649aaf6b10f4ff8a42006013b8d1149f7271cafd971139f'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu11.76.21-ca-jdk11.0.25-macosx_aarch64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu11.78.15-ca-jdk11.0.26-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :big_sur'
