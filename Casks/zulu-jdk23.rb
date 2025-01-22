@@ -1,19 +1,19 @@
 cask 'zulu-jdk23' do
 
   on_intel do
-    version '23.32.11,23.0.2'
-    sha256 '0b9e55f672e86b445aa162980fc47b696d14bfa30a7cd488afb85c3fec98646b'
+    version '23.30.13,23.0.1'
+    sha256 'ef0137abfde45ddaaa0dcffc042ead30cc32742d0e03c1ae7815514e34fd2d7e'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu23.32.11-ca-jdk23.0.2-macosx_x64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu23.30.13-ca-jdk23.0.1-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :mojave'
   end
   on_arm do
-    version '23.32.11,23.0.2'
-    sha256 '825084ccc10217136b2090a5b277cf693234cb7324d880a665ebcfb066f32a43'
+    version '23.30.13,23.0.1'
+    sha256 '53aa42b37637a7fc87d17325e3383a03f3ad87d51b4fccff168112be0aae0ef1'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu23.32.11-ca-jdk23.0.2-macosx_aarch64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu23.30.13-ca-jdk23.0.1-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/zulu-community/'
 
     depends_on macos: '>= :big_sur'
