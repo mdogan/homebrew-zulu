@@ -85,7 +85,10 @@ public final class Main {
       }
 
       var workflowFile = workflowsDir.resolve("jdk" + jdkVersion + ".yml");
-      var workflow = WORKFLOW_TEMPLATE.replace("{VERSION}", String.valueOf(jdkVersion));
+      var workflow =
+          WORKFLOW_TEMPLATE
+              .replace("{VERSION}", String.valueOf(jdkVersion))
+              .replace("{REUSABLE_WORKFLOW}", REUSABLE_WORKFLOW);
       Files.writeString(workflowFile, workflow);
     }
 
@@ -216,6 +219,7 @@ public final class Main {
 
   private static final int MINIMUM_JDK_VERSION = 7;
   private static final String VERSION_HEADER = "## Versions\n\n";
+  private static final String REUSABLE_WORKFLOW = ".github/workflows/reusable-cask-checks.yml";
   private static final String WORKFLOW_TEMPLATE =
       """
 name: JDK{VERSION}
@@ -225,46 +229,26 @@ on:
     branches:
       - master
     paths:
-      - '.github/workflows/jdk{VERSION}.yml'
+      - '{REUSABLE_WORKFLOW}'
       - 'Casks/zulu-jdk{VERSION}.rb'
   pull_request:
     branches:
       - master
     paths:
-      - '.github/workflows/jdk{VERSION}.yml'
+      - '{REUSABLE_WORKFLOW}'
       - 'Casks/zulu-jdk{VERSION}.rb'
 
 jobs:
+  # This step is necessary for using `./github/workflows/*.yml` on the current branch, and it could be run on `ubuntu-latest`.
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
   check:
-    name: Check
-    strategy:
-      matrix:
-        os:
-          # macos-latest is based on arm64.
-          - macos-latest
-          # macos-13 is based on x64.
-          - macos-13
-    runs-on: ${{ matrix.os }}
-    env:
-      HOMEBREW_COLOR: 1
-      HOMEBREW_DEVELOPER: 1
-    steps:
-
-      - name: Check out
-        uses: actions/checkout@v4
-
-      - name: brew pull & reset & tap
-        run: |
-          brew update-reset "$(brew --repository)"
-          brew update-reset "$(brew --repository homebrew/cask)"
-          mkdir -p $(brew --repo)/Library/Taps/mdogan
-          ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
-
-      - name: install jdk{VERSION}
-        run: brew install zulu-jdk{VERSION}
-
-      - name: uninstall jdk{VERSION}
-        run: brew uninstall zulu-jdk{VERSION}
+    needs: checkout
+    uses: ./{REUSABLE_WORKFLOW}
+    with:
+      jdk-version: {VERSION}
 """;
 }
