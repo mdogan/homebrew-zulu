@@ -28,6 +28,6 @@ dependencies {
   implementation(libs.moshi)
 }
 
-tasks.named('assemble').configure {
-  dependsOn(tasks.getByName('installDist'))
+tasks.named('assemble') {
+  dependsOn(tasks.named('installDist'))
 }
