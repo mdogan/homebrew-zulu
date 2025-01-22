@@ -236,7 +236,7 @@ on:
 
 jobs:
   check:
-    uses: goooler/homebrew-zulu/.github/workflows/reusable-cask-checks.yml@master
+    uses: mdogan/homebrew-zulu/.github/workflows/reusable-cask-checks.yml@master
     with:
       jdk-version: {VERSION}
 """;
