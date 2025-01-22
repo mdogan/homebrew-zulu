@@ -1,0 +1,35 @@
+name: Reusable Brew Cask Checks
+
+on:
+  workflow_call:
+    inputs:
+      jdk-version:
+        required: true
+        type: number
+
+jobs:
+  check:
+    name: Check
+    strategy:
+      matrix:
+        os:
+          # macos-latest is based on arm64.
+          - macos-latest
+          # macos-13 is based on x64.
+          - macos-13
+    runs-on: ${{ matrix.os }}
+    env:
+      HOMEBREW_COLOR: 1
+      HOMEBREW_DEVELOPER: 1
+    steps:
+      - uses: actions/checkout@v4
+      - name: brew pull & reset & tap
+        run: |
+          brew update-reset "$(brew --repository)"
+          brew update-reset "$(brew --repository homebrew/cask)"
+          mkdir -p $(brew --repo)/Library/Taps/mdogan
+          ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
+      - name: install jdk
+        run: brew install zulu-jdk${{ inputs.jdk-version }}
+      - name: uninstall jdk
+        run: brew uninstall zulu-jdk${{ inputs.jdk-version }}
