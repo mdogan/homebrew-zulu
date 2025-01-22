@@ -5,12 +5,14 @@ on:
     branches:
       - master
     paths:
+      - '.github/workflows/reusable-cask-checks.yml'
       - '.github/workflows/jdk10.yml'
       - 'Casks/zulu-jdk10.rb'
   pull_request:
     branches:
       - master
     paths:
+      - '.github/workflows/reusable-cask-checks.yml'
       - '.github/workflows/jdk10.yml'
       - 'Casks/zulu-jdk10.rb'
 
