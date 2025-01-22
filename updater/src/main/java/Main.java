@@ -226,14 +226,12 @@ on:
       - master
     paths:
       - '.github/workflows/reusable-cask-checks.yml'
-      - '.github/workflows/jdk{VERSION}.yml'
       - 'Casks/zulu-jdk{VERSION}.rb'
   pull_request:
     branches:
       - master
     paths:
       - '.github/workflows/reusable-cask-checks.yml'
-      - '.github/workflows/jdk{VERSION}.yml'
       - 'Casks/zulu-jdk{VERSION}.rb'
 
 jobs:
