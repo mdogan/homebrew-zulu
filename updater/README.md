@@ -9,7 +9,7 @@ cd updater
 
 Next, run the application via Gradle:
 ```sh
-./gradlew run --args='..'
+./gradlew run
 ```
 
 Inspect the diff, commit the changes, and push to GitHub.
