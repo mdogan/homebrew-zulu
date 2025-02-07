@@ -28,6 +28,11 @@ public final class Main {
       Set.of("11.66.15", "12.3.11", "17.44.15", "20.32.11");
 
   public static void main(String... args) throws IOException {
+    if (args.length != 1) {
+      System.err.println("Usage: Main <repository-dir>");
+      System.exit(1);
+    }
+
     var repoDir = Paths.get(args[0]).toAbsolutePath().normalize();
     System.out.println("Repository dir: " + repoDir);
 
