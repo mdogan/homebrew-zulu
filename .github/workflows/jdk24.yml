@@ -5,44 +5,24 @@ on:
     branches:
       - master
     paths:
-      - '.github/workflows/jdk24.yml'
+      - '.github/workflows/reusable-cask-checks.yml'
       - 'Casks/zulu-jdk24.rb'
   pull_request:
     branches:
       - master
     paths:
-      - '.github/workflows/jdk24.yml'
+      - '.github/workflows/reusable-cask-checks.yml'
       - 'Casks/zulu-jdk24.rb'
 
 jobs:
+  # This step is necessary for using `./github/workflows/*.yml` on the current branch, and it could be run on `ubuntu-latest`.
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
   check:
-    name: Check
-    strategy:
-      matrix:
-        os:
-          # macos-latest is based on arm64.
-          - macos-latest
-          # macos-13 is based on x64.
-          - macos-13
-    runs-on: ${{ matrix.os }}
-    env:
-      HOMEBREW_COLOR: 1
-      HOMEBREW_DEVELOPER: 1
-    steps:
-
-      - name: Check out
-        uses: actions/checkout@v4
-
-      - name: brew pull & reset & tap
-        run: |
-          brew update-reset "$(brew --repository)"
-          brew update-reset "$(brew --repository homebrew/cask)"
-          mkdir -p $(brew --repo)/Library/Taps/mdogan
-          ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
-
-      - name: install jdk24
-        run: brew install zulu-jdk24
-
-      - name: uninstall jdk24
-        run: brew uninstall zulu-jdk24
+    needs: checkout
+    uses: ./.github/workflows/reusable-cask-checks.yml
+    with:
+      jdk-version: 24
