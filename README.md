@@ -2,7 +2,7 @@
 
 https://www.azul.com/downloads/?os=macos&package=jdk#zulu
 
-https://www.azul.com/products/zulu-mission-control/
+https://www.azul.com/products/components/azul-mission-control/
 
 ## Installation:
 
@@ -36,4 +36,4 @@ brew install <name>
 | OpenJDK 22 | `zulu-jdk22` | 22.0.2 | [![JDK22](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk22.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk22.yml) |
 | OpenJDK 23 | `zulu-jdk23` | 23.0.2 | [![JDK23](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk23.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk23.yml) |
 | OpenJDK 24 | `zulu-jdk24` | 24.0.0 | [![JDK24](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk24.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk24.yml) |
-| Mission Control | `zulu-mc` | 8.3.1 | [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
+| Mission Control | `zulu-mc` | 9.1.0.25 | [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |
