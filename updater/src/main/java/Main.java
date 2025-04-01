@@ -64,7 +64,8 @@ public final class Main {
         w.writeUtf8("    version '" + x86Package.caskVersion() + "'\n");
         w.writeUtf8("    sha256 '" + x86Package.sha256_hash + "'\n\n");
         w.writeUtf8("    url '" + x86Package.download_url + "',\n");
-        w.writeUtf8("        referer: 'https://www.azul.com/downloads/zulu-community/'\n\n");
+        w.writeUtf8(
+            "        referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'\n\n");
         w.writeUtf8("    depends_on macos: '>= :mojave'\n");
 
         if (armPackage != null) {
@@ -73,13 +74,14 @@ public final class Main {
           w.writeUtf8("    version '" + armPackage.caskVersion() + "'\n");
           w.writeUtf8("    sha256 '" + armPackage.sha256_hash + "'\n\n");
           w.writeUtf8("    url '" + armPackage.download_url + "',\n");
-          w.writeUtf8("        referer: 'https://www.azul.com/downloads/zulu-community/'\n\n");
+          w.writeUtf8(
+              "        referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'\n\n");
           w.writeUtf8("    depends_on macos: '>= :big_sur'\n");
           w.writeUtf8("  end\n");
         }
 
         w.writeUtf8("\n  name 'Azul Zulu® JDK " + jdkVersion + "'\n");
-        w.writeUtf8("  homepage 'https://www.azul.com/downloads/zulu-community/'\n\n");
+        w.writeUtf8("  homepage 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'\n\n");
         if (jdkVersion == 9 || jdkVersion == 10 || jdkVersion == 12 || jdkVersion == 14) {
           w.writeUtf8("  pkg 'Double-Click to Install Zulu " + jdkVersion + ".pkg'\n\n");
         } else {

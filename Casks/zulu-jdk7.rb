@@ -4,12 +4,12 @@ cask 'zulu-jdk7' do
     sha256 'f17990028acbafe8060424cd1a6e28296598c959f81a1f9bd34dba1d5b9696d7'
 
     url 'https://cdn.azul.com/zulu/bin/zulu7.56.0.11-ca-jdk7.0.352-macosx_x64.dmg',
-        referer: 'https://www.azul.com/downloads/zulu-community/'
+        referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
     depends_on macos: '>= :mojave'
 
   name 'Azul Zulu® JDK 7'
-  homepage 'https://www.azul.com/downloads/zulu-community/'
+  homepage 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
   pkg 'Double-Click to Install Azul Zulu JDK 7.pkg'
 
