@@ -18,4 +18,4 @@ jobs:
   check:
     uses: ./.github/workflows/reusable-cask-checks.yml
     with:
-      jdk-version: 23
+      jdk-version: jdk23

@@ -247,6 +247,6 @@ jobs:
   check:
     uses: ./{REUSABLE_WORKFLOW}
     with:
-      jdk-version: {VERSION}
+      jdk-version: jdk{VERSION}
 """;
 }

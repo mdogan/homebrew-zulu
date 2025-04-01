@@ -4,8 +4,9 @@ on:
   workflow_call:
     inputs:
       jdk-version:
+        description: 'Zulu JDK version to install, e.g. jdk11, jdk17, mc (special one for Mission Control), etc.'
         required: true
-        type: number
+        type: string
 
 jobs:
   check:
@@ -28,6 +29,6 @@ jobs:
           mkdir -p $(brew --repo)/Library/Taps/mdogan
           ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
       - name: install jdk
-        run: brew install zulu-jdk${{ inputs.jdk-version }}
+        run: brew install zulu-${{ inputs.jdk-version }}
       - name: uninstall jdk
-        run: brew uninstall zulu-jdk${{ inputs.jdk-version }}
+        run: brew uninstall zulu-${{ inputs.jdk-version }}
