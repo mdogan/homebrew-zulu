@@ -244,14 +244,7 @@ on:
       - 'Casks/zulu-jdk{VERSION}.rb'
 
 jobs:
-  # This step is necessary for using `./github/workflows/*.yml` on the current branch, and it could be run on `ubuntu-latest`.
-  checkout:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
   check:
-    needs: checkout
     uses: ./{REUSABLE_WORKFLOW}
     with:
       jdk-version: {VERSION}
