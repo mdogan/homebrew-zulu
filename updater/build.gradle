@@ -1,12 +1,12 @@
 plugins {
-  id('java-library')
+  id('java')
   id('application')
   alias(libs.plugins.spotless)
 }
 
 java {
   toolchain {
-    languageVersion = JavaLanguageVersion.of(17)
+    languageVersion = JavaLanguageVersion.of(21)
   }
 }
 
@@ -28,6 +28,11 @@ dependencies {
   implementation(libs.moshi)
 }
 
-tasks.named('assemble').configure {
-  dependsOn(tasks.getByName('installDist'))
+tasks.named('run', JavaExec) {
+  // Pass the outside of the project directory.
+  args '..'
+}
+
+tasks.named('assemble') {
+  dependsOn(tasks.named('installDist'))
 }
