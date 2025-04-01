@@ -1,6 +1,6 @@
 # Zulu JDK Homebrew Casks
 
-[https://www.azul.com/downloads/zulu-community/](https://www.azul.com/downloads/zulu-community/?&os=macos&os-details=macOS&package=jdk)
+https://www.azul.com/downloads/?os=macos&package=jdk#zulu
 
 https://www.azul.com/products/zulu-mission-control/
 

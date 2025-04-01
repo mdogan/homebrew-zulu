@@ -4,12 +4,12 @@ cask 'zulu-jdk12' do
     sha256 '5b46f5a0ebc3bf9c98763a6ce173c9578db04ceadd352a7b25baeb59a8240bcb'
 
     url 'https://cdn.azul.com/zulu/bin/zulu12.3.11_2-ca-jdk12.0.2-macosx_x64.dmg',
-        referer: 'https://www.azul.com/downloads/zulu-community/'
+        referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
     depends_on macos: '>= :mojave'
 
   name 'Azul Zulu® JDK 12'
-  homepage 'https://www.azul.com/downloads/zulu-community/'
+  homepage 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
   pkg 'Double-Click to Install Zulu 12.pkg'
 
