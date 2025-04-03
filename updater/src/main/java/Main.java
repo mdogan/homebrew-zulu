@@ -130,7 +130,7 @@ public final class Main {
                 + ".yml) |\n");
       }
       w.writeUtf8(
-          "| Mission Control | `zulu-mc` | 8.3.1 | [![MC](https://github.com/mdogan/homebrew-zulu/workflows/MissionControl/badge.svg)](https://github.com/mdogan/homebrew-zulu/actions) |\n");
+          "| Mission Control | `zulu-mc` | 9.1.0.25 | [![MC](https://github.com/mdogan/homebrew-zulu/actions/workflows/mc.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/mc.yml) |\n");
     }
   }
 
