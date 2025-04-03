@@ -5,44 +5,17 @@ on:
     branches:
       - master
     paths:
-      - '.github/workflows/jdk22.yml'
+      - '.github/workflows/reusable-cask-checks.yml'
       - 'Casks/zulu-jdk22.rb'
   pull_request:
     branches:
       - master
     paths:
-      - '.github/workflows/jdk22.yml'
+      - '.github/workflows/reusable-cask-checks.yml'
       - 'Casks/zulu-jdk22.rb'
 
 jobs:
-
   check:
-    name: Check
-    strategy:
-      matrix:
-        os:
-          # macos-latest is based on arm64.
-          - macos-latest
-          # macos-13 is based on x64.
-          - macos-13
-    runs-on: ${{ matrix.os }}
-    env:
-      HOMEBREW_COLOR: 1
-      HOMEBREW_DEVELOPER: 1
-    steps:
-
-      - name: Check out
-        uses: actions/checkout@v4
-
-      - name: brew pull & reset & tap
-        run: |
-          brew update-reset "$(brew --repository)"
-          brew update-reset "$(brew --repository homebrew/cask)"
-          mkdir -p $(brew --repo)/Library/Taps/mdogan
-          ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
-
-      - name: install jdk22
-        run: brew install zulu-jdk22
-
-      - name: uninstall jdk22
-        run: brew uninstall zulu-jdk22
+    uses: ./.github/workflows/reusable-cask-checks.yml
+    with:
+      jdk-version: jdk22
