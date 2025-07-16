@@ -35,7 +35,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          branch-token: ${{ steps.generate_token.outputs.token }}
+          token: ${{ steps.generate_token.outputs.token }}
           commit-message: Upgrade JDK Casks to the latest versions
           title: Upgrade JDK Casks
           body: |
