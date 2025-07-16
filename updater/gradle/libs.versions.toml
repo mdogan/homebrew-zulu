@@ -1,11 +1,11 @@
 [versions]
-retrofit = "2.11.0"
+retrofit = "3.0.0"
 
 [plugins]
-spotless = { id = "com.diffplug.spotless", version = "7.0.2" }
+spotless = { id = "com.diffplug.spotless", version = "7.1.0" }
 
 [libraries]
 retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
-okhttp = "com.squareup.okhttp3:okhttp:4.12.0"
+okhttp = "com.squareup.okhttp3:okhttp:5.1.0"
 moshi = "com.squareup.moshi:moshi:1.15.2"
