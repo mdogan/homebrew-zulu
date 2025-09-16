@@ -36,4 +36,5 @@ brew install <name>
 | OpenJDK 22 | `zulu-jdk22` | 22.0.2 | [![JDK22](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk22.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk22.yml) |
 | OpenJDK 23 | `zulu-jdk23` | 23.0.2 | [![JDK23](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk23.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk23.yml) |
 | OpenJDK 24 | `zulu-jdk24` | 24.0.2 | [![JDK24](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk24.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk24.yml) |
+| OpenJDK 25 | `zulu-jdk25` | 25.0.0 | [![JDK25](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk25.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk25.yml) |
 | Mission Control | `zulu-mc` | 9.1.0.25 | [![MC](https://github.com/mdogan/homebrew-zulu/actions/workflows/mc.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/mc.yml) |
