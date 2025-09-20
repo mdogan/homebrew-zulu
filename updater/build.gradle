@@ -4,12 +4,6 @@ plugins {
   alias(libs.plugins.spotless)
 }
 
-java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(21)
-  }
-}
-
 application {
   mainClass = 'Main'
 }
