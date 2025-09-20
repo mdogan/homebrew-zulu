@@ -23,7 +23,7 @@ jobs:
       - name: Run Updater
         run: |
           cd updater
-          ./gradlew run --args='..'
+          ./gradlew run
 
       - name: Generate Github Token
         uses: actions/create-github-app-token@v2

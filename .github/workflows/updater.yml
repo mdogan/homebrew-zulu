@@ -32,4 +32,4 @@ jobs:
       - name: Build
         run: |
           cd updater
-          ./gradlew build
+          ./gradlew build run
