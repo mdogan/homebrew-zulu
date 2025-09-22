@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'mdogan/homebrew-zulu'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
           java-version: 21
@@ -23,7 +23,7 @@ jobs:
       - name: Run Updater
         run: |
           cd updater
-          ./gradlew run --args='..'
+          ./gradlew run
 
       - name: Generate Github Token
         uses: actions/create-github-app-token@v2

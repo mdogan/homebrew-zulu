@@ -14,14 +14,14 @@ jobs:
       matrix:
         # https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
         os:
-          - macos-latest # macos-latest is based on arm64.
-          - macos-13 # macos-13 is based on x64.
+          - macos-latest # Based on arm64.
+          - macos-15-intel # Based on x64.
     runs-on: ${{ matrix.os }}
     env:
       HOMEBREW_COLOR: 1
       HOMEBREW_DEVELOPER: 1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: brew pull & reset & tap
         run: |
           brew update-reset "$(brew --repository)"

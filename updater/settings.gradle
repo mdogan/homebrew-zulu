@@ -1,6 +1,17 @@
+pluginManagement {
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+  }
+}
+
 dependencyResolutionManagement {
   repositories {
     mavenCentral()
   }
   repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
+}
+
+if (JavaVersion.current() < JavaVersion.VERSION_21) {
+  throw GradleException("Java 21 or higher is required to run this project. Current version: ${JavaVersion.current()}")
 }
