@@ -228,7 +228,7 @@ public final class Main {
   private static final String VERSION_HEADER = "## Versions\n\n";
   private static final String REUSABLE_WORKFLOW = ".github/workflows/reusable-cask-checks.yml";
   private static final String WORKFLOW_TEMPLATE =
-      """
+"""
 name: JDK{VERSION}
 
 on:
