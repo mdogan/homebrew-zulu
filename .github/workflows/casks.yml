@@ -1,0 +1,75 @@
+name: Check Casks
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  changed-casks:
+    name: Get changed casks
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.changed-files.outputs.all_changed_files }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+        with:
+          files: Casks/**.rb
+          matrix: true
+      - name: List all changed files
+        run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
+
+  verify-casks:
+    name: Verify casks
+    needs:
+      - changed-casks
+    if: ${{ needs.changed-casks.outputs.matrix != '[]' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        cask-file: ${{ fromJSON(needs.changed-casks.outputs.matrix) }}
+        os: # https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+          - macos-latest # Based on arm64.
+          - macos-15-intel # Based on x64.
+    runs-on: ${{ matrix.os }}
+    env:
+      HOMEBREW_COLOR: 1
+      HOMEBREW_DEVELOPER: 1
+    steps:
+      - uses: actions/checkout@v5
+      - name: brew pull & reset & tap
+        run: |
+          brew update-reset "$(brew --repository)"
+          brew update-reset "$(brew --repository homebrew/cask)"
+          mkdir -p $(brew --repo)/Library/Taps/mdogan
+          ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
+      - name: cask name
+        run: |
+          echo "CASK_NAME=$(basename "${{ matrix.cask-file }}" .rb)" >> $GITHUB_ENV
+      - name: install jdk
+        run: brew install ${{ env.CASK_NAME }}
+      - name: uninstall jdk
+        run: brew uninstall ${{ env.CASK_NAME }}
+
+  # Status check that is required in branch protection rules.
+  cask-status:
+    name: Cask status
+    needs:
+      - verify-casks
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Check
+        run: |
+          results=$(tr -d '\n' <<< '${{ toJSON(needs.*.result) }}')
+          if ! grep -q -v -E '(failure|cancelled)' <<< "$results"; then
+            echo "One or more required jobs failed"
+            exit 1
+          fi
+          echo "All required jobs completed successfully."
