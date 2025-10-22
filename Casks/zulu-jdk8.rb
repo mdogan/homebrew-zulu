@@ -1,19 +1,19 @@
 cask 'zulu-jdk8' do
 
   on_intel do
-    version '8.88.0.19,8.0.462'
-    sha256 '11a6eaf0a1e87cc50397c778098b732faf487d6f70b2ff870f7d27fd81566ed9'
+    version '8.90.0.19,8.0.472'
+    sha256 '31a7f0c2699979ba3d444c91538a7111e4f7bae9c89011252ba4b8f77774d56e'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu8.88.0.19-ca-jdk8.0.462-macosx_x64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu8.90.0.19-ca-jdk8.0.472-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
     depends_on macos: '>= :mojave'
   end
   on_arm do
-    version '8.88.0.19,8.0.462'
-    sha256 '0ea9ca76e97599fa0326c4875b312a09c5a66cba9ea136d0de484a5261c7ec3b'
+    version '8.90.0.19,8.0.472'
+    sha256 '9088107eb0bd1a7441724e44ff7c3150c21c3176e2873d323ca4a3cd0a550d54'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu8.88.0.19-ca-jdk8.0.462-macosx_aarch64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu8.90.0.19-ca-jdk8.0.472-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
     depends_on macos: '>= :big_sur'
