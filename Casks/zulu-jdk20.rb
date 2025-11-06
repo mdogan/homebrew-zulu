@@ -7,7 +7,6 @@ cask 'zulu-jdk20' do
     url 'https://cdn.azul.com/zulu/bin/zulu20.32.11_1-ca-jdk20.0.2-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
-    depends_on macos: '>= :mojave'
   end
   on_arm do
     version '20.32.11,20.0.2'
@@ -16,7 +15,6 @@ cask 'zulu-jdk20' do
     url 'https://cdn.azul.com/zulu/bin/zulu20.32.11_1-ca-jdk20.0.2-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
-    depends_on macos: '>= :big_sur'
   end
 
   name 'Azul Zulu® JDK 20'

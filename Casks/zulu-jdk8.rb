@@ -7,7 +7,6 @@ cask 'zulu-jdk8' do
     url 'https://cdn.azul.com/zulu/bin/zulu8.90.0.19-ca-jdk8.0.472-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
-    depends_on macos: '>= :mojave'
   end
   on_arm do
     version '8.90.0.19,8.0.472'
@@ -16,7 +15,6 @@ cask 'zulu-jdk8' do
     url 'https://cdn.azul.com/zulu/bin/zulu8.90.0.19-ca-jdk8.0.472-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
-    depends_on macos: '>= :big_sur'
   end
 
   name 'Azul Zulu® JDK 8'

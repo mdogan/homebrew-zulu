@@ -7,7 +7,6 @@ cask 'zulu-jdk24' do
     url 'https://cdn.azul.com/zulu/bin/zulu24.32.13-ca-jdk24.0.2-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
-    depends_on macos: '>= :mojave'
   end
   on_arm do
     version '24.32.13,24.0.2'
@@ -16,7 +15,6 @@ cask 'zulu-jdk24' do
     url 'https://cdn.azul.com/zulu/bin/zulu24.32.13-ca-jdk24.0.2-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
-    depends_on macos: '>= :big_sur'
   end
 
   name 'Azul Zulu® JDK 24'
