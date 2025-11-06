@@ -24,8 +24,7 @@ public final class Main {
   // Zulu respin versions.
   // They update the same bundle version after fixing some packaging issues.
   // Respin versions have a number suffix after an underscore: `_1`, `_2` etc.
-  private static final Set<String> respinVersions =
-      Set.of("11.66.15", "12.3.11", "17.44.15", "20.32.11");
+  private static final Set<String> respinVersions = Set.of();
 
   public static void main(String... args) throws IOException {
     if (args.length != 1) {
