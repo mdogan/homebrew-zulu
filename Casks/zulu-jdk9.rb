@@ -8,6 +8,7 @@ cask 'zulu-jdk9' do
 
 
   name 'Azul Zulu® JDK 9'
+  desc 'OpenJDK distribution from Azul'
   homepage 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
   pkg 'Double-Click to Install Zulu 9.pkg'
