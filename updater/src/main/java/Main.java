@@ -77,7 +77,8 @@ public final class Main {
           w.writeUtf8("  end\n");
         }
 
-        w.writeUtf8("\n  name 'Azul Zulu® JDK " + jdkVersion + "'\n");
+        w.writeUtf8("\n  name 'Azul Zulu® JDK " + jdkVersion + "'");
+        w.writeUtf8("\n  desc 'OpenJDK distribution from Azul'\n");
         w.writeUtf8("  homepage 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'\n\n");
         if (jdkVersion == 9 || jdkVersion == 10 || jdkVersion == 12 || jdkVersion == 14) {
           w.writeUtf8("  pkg 'Double-Click to Install Zulu " + jdkVersion + ".pkg'\n\n");

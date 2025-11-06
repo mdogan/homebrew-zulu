@@ -32,3 +32,5 @@ jobs:
         run: brew install zulu-${{ inputs.jdk-version }}
       - name: uninstall jdk
         run: brew uninstall zulu-${{ inputs.jdk-version }}
+      - name: audit casks
+        run: brew audit --strict zulu-${{ inputs.jdk-version }}
