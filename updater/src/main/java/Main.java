@@ -66,7 +66,6 @@ public final class Main {
         w.writeUtf8("    url '" + x86Package.download_url + "',\n");
         w.writeUtf8(
             "        referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'\n\n");
-        w.writeUtf8("    depends_on macos: '>= :mojave'\n");
 
         if (armPackage != null) {
           w.writeUtf8("  end\n");
@@ -76,7 +75,6 @@ public final class Main {
           w.writeUtf8("    url '" + armPackage.download_url + "',\n");
           w.writeUtf8(
               "        referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'\n\n");
-          w.writeUtf8("    depends_on macos: '>= :big_sur'\n");
           w.writeUtf8("  end\n");
         }
 
