@@ -18,6 +18,7 @@ cask 'zulu-jdk24' do
   end
 
   name 'Azul Zulu® JDK 24'
+  desc 'OpenJDK distribution from Azul'
   homepage 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
   pkg 'Double-Click to Install Azul Zulu JDK 24.pkg'

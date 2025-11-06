@@ -1,6 +1,7 @@
 cask 'zulu-mc' do
 
   name 'Zulu® Mission Control'
+  desc 'Tools to manage, monitor, profile and troubleshoot Java applications'
   homepage 'https://www.azul.com/products/components/azul-mission-control/'
 
   on_intel do
