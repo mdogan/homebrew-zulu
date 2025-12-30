@@ -12,4 +12,9 @@ Next, run the application via Gradle:
 ./gradlew run
 ```
 
+Finally, fix the styles with:
+```sh
+brew style --fix ../Casks/*.rb
+```
+
 Inspect the diff, commit the changes, and push to GitHub.

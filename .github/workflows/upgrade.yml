@@ -24,6 +24,7 @@ jobs:
         run: |
           cd updater
           ./gradlew run
+          brew style --fix ../Casks/*.rb
 
       - name: Generate Github Token
         uses: actions/create-github-app-token@v2
