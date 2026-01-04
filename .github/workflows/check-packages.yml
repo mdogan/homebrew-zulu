@@ -1,0 +1,68 @@
+name: Check Packages
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  changed-packages:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.changed-files.outputs.all_changed_files }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: tj-actions/changed-files@v47
+        id: changed-files
+        with:
+          files: '**/*.rb'
+          matrix: true
+      - name: List all changed files
+        run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
+
+  verify-packages:
+    needs:
+      - changed-packages
+    if: ${{ needs.changed-packages.outputs.matrix != '[]' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        packages: ${{ fromJSON(needs.changed-packages.outputs.matrix) }}
+        os: # https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+          - macos-latest # Based on arm64.
+          - macos-15-intel # Based on x64.
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Set up Homebrew Tap
+        run: |
+          brew update-reset "$(brew --repository)"
+          brew update-reset "$(brew --repository homebrew/cask)"
+          TAP_BASE=$(brew --taps)/${{ github.repository_owner }}
+          mkdir -p $TAP_BASE
+          ln -s $GITHUB_WORKSPACE $TAP_BASE/${{ github.event.repository.name }}
+      - name: Check Package
+        run: |
+          PACKAGE_NAME="$(basename "${{ matrix.packages }}" .rb)"
+          printf "\033[32m==>\033[0m \033[1;30mAuditing\033[0m \033[1;32m%s\033[0m\n" "$PACKAGE_NAME"
+          brew audit --strict "$PACKAGE_NAME"
+          brew install "$PACKAGE_NAME"
+          brew uninstall "$PACKAGE_NAME"
+
+  # Status check that is required in branch protection rules.
+  final-status:
+    needs:
+      - changed-packages
+      - verify-packages
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Check
+        run: |
+          results=$(tr -d '\n' <<< '${{ toJSON(needs.*.result) }}')
+          if ! grep -q -v -E '(failure|cancelled)' <<< "$results"; then
+            echo "One or more required jobs failed"
+            exit 1
+          fi
+          echo "All required jobs completed successfully."

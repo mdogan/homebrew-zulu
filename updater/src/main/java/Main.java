@@ -37,7 +37,6 @@ public final class Main {
 
     var readmeFile = repoDir.resolve("README.md");
     var caskDir = repoDir.resolve("Casks");
-    var workflowsDir = repoDir.resolve(".github/workflows");
 
     Map<Integer, PackageSet> jdkPackages = loadJdks();
     for (var entry : jdkPackages.entrySet()) {
@@ -88,13 +87,6 @@ public final class Main {
         w.writeUtf8("  uninstall pkgutil: 'com.azulsystems.zulu." + jdkVersion + "'\n");
         w.writeUtf8("end\n");
       }
-
-      var workflowFile = workflowsDir.resolve("jdk" + jdkVersion + ".yml");
-      var workflow =
-          WORKFLOW_TEMPLATE
-              .replace("{VERSION}", String.valueOf(jdkVersion))
-              .replace("{REUSABLE_WORKFLOW}", REUSABLE_WORKFLOW);
-      Files.writeString(workflowFile, workflow);
     }
 
     var readmeText = Files.readString(readmeFile);
@@ -102,8 +94,8 @@ public final class Main {
     var readmeStart = readmeText.substring(0, versionHeaderIndex + VERSION_HEADER.length());
     try (var w = buffer(sink(readmeFile))) {
       w.writeUtf8(readmeStart);
-      w.writeUtf8("| JDK | Cask Name | Version | Build Status |\n");
-      w.writeUtf8("|--|--|--|--|\n");
+      w.writeUtf8("| JDK | Cask Name | Version |\n");
+      w.writeUtf8("|--|--|--|\n");
 
       var sortedVersions =
           jdkPackages.entrySet().stream()
@@ -111,24 +103,11 @@ public final class Main {
               .sorted(Entry.comparingByKey())
               .toList();
       for (var e : sortedVersions) {
-        var jdkVersion = e.getKey();
-        w.writeUtf8(
-            "| OpenJDK "
-                + jdkVersion
-                + " | `zulu-jdk"
-                + jdkVersion
-                + "` | "
-                + e.getValue()
-                + " | [![JDK"
-                + jdkVersion
-                + "](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk"
-                + jdkVersion
-                + ".yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk"
-                + jdkVersion
-                + ".yml) |\n");
+        var mjrVer = e.getKey();
+        var semVer = e.getValue();
+        w.writeUtf8("| OpenJDK %s | `zulu-jdk%s` | %s |\n".formatted(mjrVer, mjrVer, semVer));
       }
-      w.writeUtf8(
-          "| Mission Control | `zulu-mc` | 9.1.0.25 | [![MC](https://github.com/mdogan/homebrew-zulu/actions/workflows/mc.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/mc.yml) |\n");
+      w.writeUtf8("| Mission Control | `zulu-mc` | 9.1.0.25 |\n");
     }
   }
 
@@ -224,29 +203,4 @@ public final class Main {
 
   private static final int MINIMUM_JDK_VERSION = 7;
   private static final String VERSION_HEADER = "## Versions\n\n";
-  private static final String REUSABLE_WORKFLOW = ".github/workflows/reusable-cask-checks.yml";
-  private static final String WORKFLOW_TEMPLATE =
-"""
-name: JDK{VERSION}
-
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - '{REUSABLE_WORKFLOW}'
-      - 'Casks/zulu-jdk{VERSION}.rb'
-  pull_request:
-    branches:
-      - master
-    paths:
-      - '{REUSABLE_WORKFLOW}'
-      - 'Casks/zulu-jdk{VERSION}.rb'
-
-jobs:
-  check:
-    uses: ./{REUSABLE_WORKFLOW}
-    with:
-      jdk-version: jdk{VERSION}
-""";
 }
