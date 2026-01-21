@@ -17,17 +17,15 @@ jobs:
           - macos-latest # Based on arm64.
           - macos-15-intel # Based on x64.
     runs-on: ${{ matrix.os }}
-    env:
-      HOMEBREW_COLOR: 1
-      HOMEBREW_DEVELOPER: 1
     steps:
       - uses: actions/checkout@v5
-      - name: brew pull & reset & tap
+      - name: Set up Homebrew Tap
         run: |
           brew update-reset "$(brew --repository)"
           brew update-reset "$(brew --repository homebrew/cask)"
-          mkdir -p $(brew --repo)/Library/Taps/mdogan
-          ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/mdogan/homebrew-zulu
+          TAP_BASE=$(brew --taps)/${{ github.repository_owner }}
+          mkdir -p $TAP_BASE
+          ln -s $GITHUB_WORKSPACE $TAP_BASE/${{ github.event.repository.name }}
       - name: install jdk
         run: brew install zulu-${{ inputs.jdk-version }}
       - name: uninstall jdk
