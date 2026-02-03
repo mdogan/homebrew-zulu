@@ -19,10 +19,10 @@ brew install <name>
 | JDK | Cask Name | Version | Build Status |
 |--|--|--|--|
 | OpenJDK 7 | `zulu-jdk7` | 7.0.352 | [![JDK7](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk7.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk7.yml) |
-| OpenJDK 8 | `zulu-jdk8` | 8.0.472 | [![JDK8](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk8.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk8.yml) |
+| OpenJDK 8 | `zulu-jdk8` | 8.0.482 | [![JDK8](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk8.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk8.yml) |
 | OpenJDK 9 | `zulu-jdk9` | 9.0.7 | [![JDK9](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk9.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk9.yml) |
 | OpenJDK 10 | `zulu-jdk10` | 10.0.2 | [![JDK10](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk10.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk10.yml) |
-| OpenJDK 11 | `zulu-jdk11` | 11.0.29 | [![JDK11](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk11.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk11.yml) |
+| OpenJDK 11 | `zulu-jdk11` | 11.0.30 | [![JDK11](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk11.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk11.yml) |
 | OpenJDK 12 | `zulu-jdk12` | 12.0.2 | [![JDK12](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk12.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk12.yml) |
 | OpenJDK 13 | `zulu-jdk13` | 13.0.14 | [![JDK13](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk13.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk13.yml) |
 | OpenJDK 14 | `zulu-jdk14` | 14.0.2 | [![JDK14](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk14.yml/badge.svg?branch=master&event=push)](https://github.com/mdogan/homebrew-zulu/actions/workflows/jdk14.yml) |
