@@ -15,7 +15,7 @@ jobs:
         # https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
         os:
           - macos-latest # Based on arm64.
-          - macos-15-intel # Based on x64.
+          - macos-26-intel # Based on x64.
     runs-on: ${{ matrix.os }}
     env:
       HOMEBREW_COLOR: 1
