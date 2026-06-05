@@ -133,42 +133,44 @@ public final class Main {
   }
 
   private static Map<Integer, PackageSet> loadJdks() throws IOException {
+    var jdkPackages = new LinkedHashMap<Integer, PackageSet>();
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
     builder.connectTimeout(30, TimeUnit.SECONDS);
     builder.readTimeout(30, TimeUnit.SECONDS);
     var okhttp = builder.build();
-    var retrofit =
-        new Retrofit.Builder()
-            .baseUrl("https://api.azul.com/metadata/v1/zulu/packages/")
-            .client(okhttp)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .build();
-    var service = retrofit.create(AzulMetadataService.class);
 
-    var jdkPackages = new LinkedHashMap<Integer, PackageSet>();
-    int jdkVersion = MINIMUM_JDK_VERSION;
-    while (true) {
-      var x86PackageDetails = service.getPackageDetails(jdkVersion, "x86");
-      System.out.println(jdkVersion + " x86 " + x86PackageDetails);
+    try {
+      var retrofit =
+          new Retrofit.Builder()
+              .baseUrl("https://api.azul.com/metadata/v1/zulu/packages/")
+              .client(okhttp)
+              .addConverterFactory(MoshiConverterFactory.create())
+              .build();
+      var service = retrofit.create(AzulMetadataService.class);
 
-      var armPackageDetails = service.getPackageDetails(jdkVersion, "arm");
-      System.out.println(jdkVersion + " ARM " + armPackageDetails);
+      int jdkVersion = MINIMUM_JDK_VERSION;
+      while (true) {
+        var x86PackageDetails = service.getPackageDetails(jdkVersion, "x86");
+        System.out.println(jdkVersion + " x86 " + x86PackageDetails);
 
-      if (x86PackageDetails == null) {
-        if (armPackageDetails == null) {
-          break;
+        var armPackageDetails = service.getPackageDetails(jdkVersion, "arm");
+        System.out.println(jdkVersion + " ARM " + armPackageDetails);
+
+        if (x86PackageDetails == null) {
+          if (armPackageDetails == null) {
+            break;
+          }
+          throw new IllegalStateException("JDK " + jdkVersion + " missing x86 arch");
         }
-        throw new IllegalStateException("JDK " + jdkVersion + " missing x86 arch");
+
+        jdkPackages.put(jdkVersion, new PackageSet(x86PackageDetails, armPackageDetails));
+        jdkVersion++;
       }
-
-      jdkPackages.put(jdkVersion, new PackageSet(x86PackageDetails, armPackageDetails));
-      jdkVersion++;
+    } finally {
+      // Allow JVM to quickly exit by shutting down OkHttp resources.
+      okhttp.dispatcher().executorService().shutdown();
+      okhttp.connectionPool().evictAll();
     }
-
-    // Allow JVM to quickly exit by shutting down OkHttp resources.
-    okhttp.dispatcher().executorService().shutdown();
-    okhttp.connectionPool().evictAll();
-
     return jdkPackages;
   }
 
@@ -210,7 +212,19 @@ public final class Main {
 
     default Package getPackageDetails(int version, String architecture) throws IOException {
       var response = this.latestPackages(version, architecture).execute();
-      var latestPackages = response.isSuccessful() ? response.body() : null;
+      if (!response.isSuccessful()) {
+        throw new IOException(
+            "Failed to load JDK "
+                + version
+                + " "
+                + architecture
+                + " package list: HTTP "
+                + response.code()
+                + " "
+                + response.message());
+      }
+
+      var latestPackages = response.body();
 
       if (latestPackages == null || latestPackages.isEmpty()) return null;
 
@@ -218,7 +232,16 @@ public final class Main {
       var latestPackage = latestPackages.get(0);
 
       var packageDetailsResponse = this.packageDetails(latestPackage.package_uuid).execute();
-      return packageDetailsResponse.isSuccessful() ? packageDetailsResponse.body() : null;
+      if (!packageDetailsResponse.isSuccessful()) {
+        throw new IOException(
+            "Failed to load package details for "
+                + latestPackage.package_uuid
+                + ": HTTP "
+                + packageDetailsResponse.code()
+                + " "
+                + packageDetailsResponse.message());
+      }
+      return packageDetailsResponse.body();
     }
   }
 
