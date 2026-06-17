@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       jdk-version:
-        description: 'Zulu JDK version to install, e.g. jdk11, jdk17, mc (special one for Mission Control), etc.'
+        description: "Zulu JDK version to install, e.g. jdk11, jdk17, mc (special one for Mission Control), etc."
         required: true
         type: string
 
@@ -12,7 +12,7 @@ jobs:
   check:
     strategy:
       matrix:
-        # https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+        # https://docs.github.com/en/actions/reference/runners/github-hosted-runners
         os:
           - macos-latest # Based on arm64.
           - macos-26-intel # Based on x64.
@@ -27,7 +27,9 @@ jobs:
           mkdir -p $TAP_BASE
           ln -s $GITHUB_WORKSPACE $TAP_BASE/${{ github.event.repository.name }}
       - name: install jdk
-        run: brew install zulu-${{ inputs.jdk-version }}
+        run: |
+          brew trust mdogan/zulu
+          brew install zulu-${{ inputs.jdk-version }}
       - name: uninstall jdk
         run: brew uninstall zulu-${{ inputs.jdk-version }}
       - name: audit casks
