@@ -1,18 +1,18 @@
 cask 'zulu-jdk21' do
 
   on_intel do
-    version '21.52.15,21.0.12'
-    sha256 '194881a9ac4180a3ebaa5d453e63e70ddfb57f9659dc61772956ced8273ac4f3'
+    version '21.52.203,21.0.12.1'
+    sha256 'a9c513deaa7b810f71e786ffcb040043695fb3dc03866834889218d38bc18ac6'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu21.52.15-ca-jdk21.0.12-macosx_x64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu21.52.203-ca-jdk21.0.12.1-macosx_x64.dmg',
         referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
   end
   on_arm do
-    version '21.52.15,21.0.12'
-    sha256 '91dab57dfbcc354b960ea07f7e9541141f4e81b0242016c391906b185aecec0c'
+    version '21.52.203,21.0.12.1'
+    sha256 '3490a57308781fc8f4d8c35cedb9cc3407e87ce0c9f5a2c001574d2f89584321'
 
-    url 'https://cdn.azul.com/zulu/bin/zulu21.52.15-ca-jdk21.0.12-macosx_aarch64.dmg',
+    url 'https://cdn.azul.com/zulu/bin/zulu21.52.203-ca-jdk21.0.12.1-macosx_aarch64.dmg',
         referer: 'https://www.azul.com/downloads/?os=macos&package=jdk#zulu'
 
   end
