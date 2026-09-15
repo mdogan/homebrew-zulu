@@ -1,0 +1,21 @@
+name: JDK27
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/reusable-cask-checks.yml'
+      - 'Casks/zulu-jdk27.rb'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/reusable-cask-checks.yml'
+      - 'Casks/zulu-jdk27.rb'
+
+jobs:
+  check:
+    uses: ./.github/workflows/reusable-cask-checks.yml
+    with:
+      jdk-version: jdk27
