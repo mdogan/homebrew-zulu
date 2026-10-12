@@ -1,6 +1,6 @@
 # Updater
 
-Automatically update the Cask definitions, GitHub Action workflows, and root README with new JDKs.
+Automatically update the Cask definitions and root README with new JDKs.
 
 First, check out the `updater` directory:
 ```sh
