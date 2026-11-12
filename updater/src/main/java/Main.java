@@ -1,4 +1,5 @@
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toCollection;
 import static okio.Okio.buffer;
 import static okio.Okio.sink;
 
@@ -8,9 +9,13 @@ import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -39,7 +44,17 @@ public final class Main {
     var caskDir = repoDir.resolve("Casks");
     var workflowsDir = repoDir.resolve(".github/workflows");
 
-    Map<Integer, PackageSet> jdkPackages = loadJdks();
+    var existingJdkVersions = existingJdkVersions(caskDir);
+    var newestExistingJdkVersion =
+        existingJdkVersions.isEmpty() ? MINIMUM_JDK_VERSION - 1 : existingJdkVersions.last();
+
+    Map<Integer, PackageSet> jdkPackages = loadJdks(newestExistingJdkVersion);
+    if (jdkPackages.isEmpty()) {
+      // Never overwrite the Casks and README with an empty JDK list.
+      throw new IllegalStateException(
+          "Azul metadata API returned no JDK packages. Not updating the Casks and README.");
+    }
+
     for (var entry : jdkPackages.entrySet()) {
       int jdkVersion = entry.getKey();
       var x86Package = entry.getValue().x86;
@@ -52,8 +67,7 @@ public final class Main {
         continue;
       }
 
-      var caskFile = caskDir.resolve("zulu-jdk" + jdkVersion + ".rb");
-      try (var w = buffer(sink(caskFile))) {
+      try (var w = buffer(sink(caskFile(caskDir, jdkVersion)))) {
         w.writeUtf8("cask 'zulu-jdk" + jdkVersion + "' do\n\n");
 
         if (armPackage != null) {
@@ -105,12 +119,18 @@ public final class Main {
       w.writeUtf8("| JDK | Cask Name | Version | Build Status |\n");
       w.writeUtf8("|--|--|--|--|\n");
 
-      var sortedVersions =
-          jdkPackages.entrySet().stream()
-              .map(e -> Map.entry(e.getKey(), e.getValue().x86().javaVersion()))
-              .sorted(Entry.comparingByKey())
-              .toList();
-      for (var e : sortedVersions) {
+      // JDK version -> Java version shown in the README, sorted by JDK version.
+      var readmeVersions = new TreeMap<Integer, String>();
+      jdkPackages.forEach(
+          (jdkVersion, packages) -> readmeVersions.put(jdkVersion, packages.x86().javaVersion()));
+      // Keep the rows of the existing casks that the Azul metadata API did not return.
+      for (int jdkVersion : existingJdkVersions) {
+        if (!readmeVersions.containsKey(jdkVersion)) {
+          readmeVersions.put(jdkVersion, caskJavaVersion(caskFile(caskDir, jdkVersion)));
+        }
+      }
+
+      for (var e : readmeVersions.entrySet()) {
         var jdkVersion = e.getKey();
         w.writeUtf8(
             "| OpenJDK "
@@ -132,7 +152,16 @@ public final class Main {
     }
   }
 
-  private static Map<Integer, PackageSet> loadJdks() throws IOException {
+  /**
+   * Loads the latest packages of each JDK version, starting from {@link #MINIMUM_JDK_VERSION}.
+   *
+   * <p>The first JDK version that has no package and is newer than {@code newestExistingJdkVersion}
+   * ends the list. A JDK version up to {@code newestExistingJdkVersion} that has no package is
+   * skipped, so its existing cask is kept as it is. The Azul metadata API can return an empty list
+   * for an old JDK version, either for a short time or for good (JDK 7 since November 2026).
+   */
+  private static Map<Integer, PackageSet> loadJdks(int newestExistingJdkVersion)
+      throws IOException {
     var jdkPackages = new LinkedHashMap<Integer, PackageSet>();
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
     builder.connectTimeout(30, TimeUnit.SECONDS);
@@ -148,8 +177,7 @@ public final class Main {
               .build();
       var service = retrofit.create(AzulMetadataService.class);
 
-      int jdkVersion = MINIMUM_JDK_VERSION;
-      while (true) {
+      for (int jdkVersion = MINIMUM_JDK_VERSION; ; jdkVersion++) {
         var x86PackageDetails = service.getPackageDetails(jdkVersion, "x86");
         System.out.println(jdkVersion + " x86 " + x86PackageDetails);
 
@@ -157,14 +185,18 @@ public final class Main {
         System.out.println(jdkVersion + " ARM " + armPackageDetails);
 
         if (x86PackageDetails == null) {
-          if (armPackageDetails == null) {
+          if (armPackageDetails != null) {
+            throw new IllegalStateException("JDK " + jdkVersion + " missing x86 arch");
+          }
+          if (jdkVersion > newestExistingJdkVersion) {
             break;
           }
-          throw new IllegalStateException("JDK " + jdkVersion + " missing x86 arch");
+          System.err.println(
+              "JDK " + jdkVersion + " has no package in Azul metadata API, keeping its cask as is");
+          continue;
         }
 
         jdkPackages.put(jdkVersion, new PackageSet(x86PackageDetails, armPackageDetails));
-        jdkVersion++;
       }
     } finally {
       // Allow JVM to quickly exit by shutting down OkHttp resources.
@@ -172,6 +204,31 @@ public final class Main {
       okhttp.connectionPool().evictAll();
     }
     return jdkPackages;
+  }
+
+  private static java.nio.file.Path caskFile(java.nio.file.Path caskDir, int jdkVersion) {
+    return caskDir.resolve("zulu-jdk" + jdkVersion + ".rb");
+  }
+
+  /** Returns the JDK versions that already have a cask, such as 7 for `zulu-jdk7.rb`. */
+  private static SortedSet<Integer> existingJdkVersions(java.nio.file.Path caskDir)
+      throws IOException {
+    try (var files = Files.list(caskDir)) {
+      return files
+          .map(file -> CASK_FILE_NAME.matcher(file.getFileName().toString()))
+          .filter(Matcher::matches)
+          .map(m -> Integer.parseInt(m.group(1)))
+          .collect(toCollection(TreeSet::new));
+    }
+  }
+
+  /** Returns the Java version of the first (x86) `version` line in a cask, such as `7.0.352`. */
+  private static String caskJavaVersion(java.nio.file.Path caskFile) throws IOException {
+    var m = CASK_VERSION.matcher(Files.readString(caskFile));
+    if (!m.find()) {
+      throw new IllegalStateException("No version found in " + caskFile);
+    }
+    return m.group(1);
   }
 
   public record Package(
@@ -247,6 +304,10 @@ public final class Main {
 
   private static final int MINIMUM_JDK_VERSION = 7;
   private static final String VERSION_HEADER = "## Versions\n\n";
+  private static final Pattern CASK_FILE_NAME = Pattern.compile("zulu-jdk(\\d+)\\.rb");
+  // Matches `version '<zulu version>,<java version>'` and captures the Java version.
+  private static final Pattern CASK_VERSION =
+      Pattern.compile("^\\s*version '[^',]+,([^']+)'", Pattern.MULTILINE);
   private static final String REUSABLE_WORKFLOW = ".github/workflows/reusable-cask-checks.yml";
   private static final String WORKFLOW_TEMPLATE =
 """
