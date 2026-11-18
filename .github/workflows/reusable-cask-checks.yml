@@ -22,7 +22,6 @@ jobs:
       - name: Set up Homebrew Tap
         run: |
           brew update-reset "$(brew --repository)"
-          brew update-reset "$(brew --repository homebrew/cask)"
           TAP_BASE=$(brew --taps)/${{ github.repository_owner }}
           mkdir -p $TAP_BASE
           ln -s $GITHUB_WORKSPACE $TAP_BASE/${{ github.event.repository.name }}
